@@ -1,7 +1,7 @@
 {
-  "name": "resume-tamplate",
+  "name": "resume-template",
   "version": "0.1.0",
-  "homepage": "https://OlesRezvaniuk.github.io/resume-tamplate",
+  "homepage": "https://OlesRezvaniuk.github.io/resume-template",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
