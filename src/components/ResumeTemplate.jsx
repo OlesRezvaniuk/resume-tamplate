@@ -17,16 +17,25 @@ function ResumeTemplate() {
   }
 
   useEffect(() => {
-    !change && firebaseRequests.postUserData({ userId: auth.uid, userData });
-  }, [change]);
+    firebaseRequests.getUserData({ setUserData });
+  }, []);
 
   return (
     <div>
+      <button
+        onClick={() => {
+          firebaseRequests.getUserData({ userId: auth.uid, setUserData });
+        }}
+      >
+        getData
+      </button>
       <button onClick={handleSingInGoogle}>Auth</button>
       <button
         style={{ background: !change ? "#fff" : "green" }}
         onClick={() => {
           setChange(!change);
+          !change &&
+            firebaseRequests.postUserData({ userId: auth.uid, userData });
         }}
       >
         {!change ? "change data" : "confirm"}

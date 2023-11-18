@@ -8,12 +8,11 @@ async function postUserData({ userId, userData }) {
   await setDoc(doc(firebase.db, "users", userId), userData);
 }
 
-async function getUserData({ setUserData }) {
-  const querySnapshot = await getDocs(collection(firebase.db, "user"));
+async function getUserData({ userId, setUserData }) {
+  const querySnapshot = await getDocs(collection(firebase.db, "users"));
   querySnapshot.forEach((doc) => {
-    //   console.log(`${doc.id} => ${doc.data()}`);
-    setUserData(doc.data());
     console.log(doc.data());
+    setUserData(doc.data());
   });
 }
 
