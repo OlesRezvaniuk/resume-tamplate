@@ -9,7 +9,10 @@ import firebaseRequests from "../firebase/firebaseRuquests/firebaseRequests";
 function ResumeTemplate() {
   const { auth } = useSelector(authSelector);
   const [change, setChange] = useState(false);
-  const [userData, setUserData] = useState({ specialty: "you'r specialty" });
+  const [userData, setUserData] = useState({
+    specialty: "you'r specialty",
+    name: "you'r first & last name",
+  });
   const dispatch = useDispatch();
 
   function handleSingInGoogle() {
@@ -17,8 +20,12 @@ function ResumeTemplate() {
   }
 
   useEffect(() => {
-    firebaseRequests.getUserData({ setUserData });
-  }, []);
+    auth && firebaseRequests.getUserData({ userId: auth.uid, setUserData });
+  }, [auth]);
+
+  function sendChanges() {
+    firebaseRequests.postUserData({ userId: auth.uid, userData });
+  }
 
   return (
     <div>
@@ -34,8 +41,7 @@ function ResumeTemplate() {
         style={{ background: !change ? "#fff" : "green" }}
         onClick={() => {
           setChange(!change);
-          !change &&
-            firebaseRequests.postUserData({ userId: auth.uid, userData });
+          change && sendChanges();
         }}
       >
         {!change ? "change data" : "confirm"}
@@ -47,6 +53,7 @@ function ResumeTemplate() {
           setUserData={setUserData}
           setChange={setChange}
         />
+        <h1>{userData.name}</h1>
       </div>
     </div>
   );

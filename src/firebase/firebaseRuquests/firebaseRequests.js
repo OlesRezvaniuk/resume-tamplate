@@ -5,11 +5,13 @@ import { doc, setDoc, getDocs } from "firebase/firestore";
 
 async function postUserData({ userId, userData }) {
   console.log("post user data");
-  await setDoc(doc(firebase.db, "users", userId), userData);
+  await setDoc(doc(firebase.db, `user-${userId}`, "userData"), userData);
 }
 
 async function getUserData({ userId, setUserData }) {
-  const querySnapshot = await getDocs(collection(firebase.db, "users"));
+  const querySnapshot = await getDocs(
+    collection(firebase.db, `user-${userId}`)
+  );
   querySnapshot.forEach((doc) => {
     console.log(doc.data());
     setUserData(doc.data());

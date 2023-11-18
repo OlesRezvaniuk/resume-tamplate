@@ -11,9 +11,6 @@ export const Specialty = ({ usersData, change, setUserData, setChange }) => {
           onChange={(e) => {
             handleSpecialtyChange(e);
           }}
-          onBlur={() => {
-            setChange(!change);
-          }}
         />
       ) : (
         <span>{usersData.specialty}</span>
