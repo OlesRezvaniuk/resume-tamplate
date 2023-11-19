@@ -8,7 +8,6 @@ import firebaseRequests from "../firebase/firebaseRuquests/firebaseRequests";
 import { Name } from "./Name/Name";
 import { Info } from "./Info/Info";
 import { Projects } from "./Projects/Projects";
-import { primalTemplate } from "../data/primalTempalte";
 
 function ResumeTemplate() {
   const { auth } = useSelector(authSelector);
@@ -18,6 +17,7 @@ function ResumeTemplate() {
     name: "you'r first & last name",
     info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, quidem iste consequuntur laudantium vitae aliquid impedit iusto magni facere, voluptatum enim perferendis recusandae quasi molestiae totam illo eius temporibus ab inventore non nisi cumque quisquam. Similique quasi vero cumque sequi a, nulla ut? Autem esse dolorum nobis! Pariatur blanditiis eius dolorum doloribus tempore voluptatum quis, repudiandae eveniet ex dicta! A nemo, illum eum ipsum consequatur vitae maxime deserunt asperiores.",
     projects: [],
+    selectedProjects: [],
   });
   const dispatch = useDispatch();
 
