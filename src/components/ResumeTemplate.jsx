@@ -5,6 +5,10 @@ import { Specialty } from "./Specialty/Specialty";
 import { UseSelector } from "react-redux/es/hooks/useSelector";
 import { authSelector } from "../redux/auth/authSelector";
 import firebaseRequests from "../firebase/firebaseRuquests/firebaseRequests";
+import { Name } from "./Name/Name";
+import { Info } from "./Info/Info";
+import { Projects } from "./Projects/Projects";
+import { primalTemplate } from "../data/primalTempalte";
 
 function ResumeTemplate() {
   const { auth } = useSelector(authSelector);
@@ -12,6 +16,8 @@ function ResumeTemplate() {
   const [userData, setUserData] = useState({
     specialty: "you'r specialty",
     name: "you'r first & last name",
+    info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, quidem iste consequuntur laudantium vitae aliquid impedit iusto magni facere, voluptatum enim perferendis recusandae quasi molestiae totam illo eius temporibus ab inventore non nisi cumque quisquam. Similique quasi vero cumque sequi a, nulla ut? Autem esse dolorum nobis! Pariatur blanditiis eius dolorum doloribus tempore voluptatum quis, repudiandae eveniet ex dicta! A nemo, illum eum ipsum consequatur vitae maxime deserunt asperiores.",
+    projects: [],
   });
   const dispatch = useDispatch();
 
@@ -20,7 +26,8 @@ function ResumeTemplate() {
   }
 
   useEffect(() => {
-    auth && firebaseRequests.getUserData({ userId: auth.uid, setUserData });
+    auth &&
+      firebaseRequests.getUserData({ userId: auth.uid, setUserData, userData });
   }, [auth]);
 
   function sendChanges() {
@@ -46,14 +53,32 @@ function ResumeTemplate() {
       >
         {!change ? "change data" : "confirm"}
       </button>
-      <div>
+      <div style={{ display: "flex", flexDirection: "column" }}>
         <Specialty
           usersData={userData}
           change={change}
           setUserData={setUserData}
           setChange={setChange}
         />
-        <h1>{userData.name}</h1>
+        <Name
+          userData={userData}
+          change={change}
+          setUserData={setUserData}
+          setChange={setChange}
+        />
+        <Info
+          userData={userData}
+          change={change}
+          setUserData={setUserData}
+          setChange={setChange}
+        />
+        <Projects
+          userData={userData}
+          change={change}
+          setUserData={setUserData}
+          setChange={setChange}
+          sendChanges={sendChanges}
+        />
       </div>
     </div>
   );

@@ -1,19 +1,14 @@
 import firebaseRequests from "../../firebase/firebaseRuquests/firebaseRequests";
 
-export const Name = ({ userData, controls, setUserData, user }) => {
-  console.log(userData);
+export const Name = ({ userData, change, setUserData }) => {
   return (
     <>
-      <br />
-      {controls ? (
+      {change ? (
         <input
           type="text"
           value={userData.name}
           onChange={(e) => {
             setUserData({ ...userData, name: e.target.value });
-          }}
-          onBlur={() => {
-            firebaseRequests.postUserData({ userData, user });
           }}
         />
       ) : (
