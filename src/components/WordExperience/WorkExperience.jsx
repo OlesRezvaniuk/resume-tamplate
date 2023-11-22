@@ -152,13 +152,30 @@ export const WorkExperience = ({ userData, setUserData, change }) => {
             return (
               <li key={item.id}>
                 {change && (
-                  <button
-                    onClick={() => {
-                      setEditWorkExperience(item);
-                    }}
-                  >
-                    edit
-                  </button>
+                  <div>
+                    <button
+                      onClick={() => {
+                        setEditWorkExperience(item);
+                      }}
+                    >
+                      edit
+                    </button>
+                    <button
+                      onClick={() => {
+                        console.log(userData.workExperience);
+                        const updateData = userData.workExperience.filter(
+                          (obj) => obj.id !== item.id
+                        );
+                        console.log(updateData);
+                        setUserData({
+                          ...userData,
+                          workExperience: updateData,
+                        });
+                      }}
+                    >
+                      delete
+                    </button>
+                  </div>
                 )}
 
                 <br />

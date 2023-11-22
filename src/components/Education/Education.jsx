@@ -13,6 +13,8 @@ export const Education = ({ userData, setUserData, change }) => {
   });
   const [editData, setEditData] = useState(null);
 
+  console.log(editData);
+
   return (
     <section>
       <h2>Education</h2>
@@ -156,7 +158,13 @@ export const Education = ({ userData, setUserData, change }) => {
             >
               ok
             </button>
-            <button>cancel</button>
+            <button
+              onClick={() => {
+                setEditData(null);
+              }}
+            >
+              cancel
+            </button>
           </div>
         </div>
       )}
