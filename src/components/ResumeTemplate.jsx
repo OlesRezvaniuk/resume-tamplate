@@ -9,6 +9,7 @@ import { Name } from "./Name/Name";
 import { Info } from "./Info/Info";
 import { Projects } from "./Projects/Projects";
 import { WorkExperience } from "./WordExperience/WorkExperience";
+import { Education } from "./Education/Education";
 
 function ResumeTemplate() {
   const { auth } = useSelector(authSelector);
@@ -20,6 +21,7 @@ function ResumeTemplate() {
     projects: [],
     selectedProjects: [],
     workExperience: [],
+    education: [],
   });
   const dispatch = useDispatch();
 
@@ -80,6 +82,11 @@ function ResumeTemplate() {
           setUserData={setUserData}
         />
         <WorkExperience
+          userData={userData}
+          setUserData={setUserData}
+          change={change}
+        />
+        <Education
           userData={userData}
           setUserData={setUserData}
           change={change}
