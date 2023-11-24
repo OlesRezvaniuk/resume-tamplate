@@ -1,5 +1,3 @@
-import firebaseRequests from "../../firebase/firebaseRuquests/firebaseRequests";
-
 export const Name = ({ userData, change, setUserData }) => {
   return (
     <>
@@ -12,7 +10,7 @@ export const Name = ({ userData, change, setUserData }) => {
           }}
         />
       ) : (
-        <h1>{userData.name}</h1>
+        <h1>{userData.name === "" ? "User name" : userData.name}</h1>
       )}
     </>
   );

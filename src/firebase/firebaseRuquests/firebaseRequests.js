@@ -7,7 +7,7 @@ async function postUserData({ userId, userData }) {
   await setDoc(doc(firebase.db, `user-${userId}`, "userData"), userData);
 }
 
-async function getUserData({ userId, setUserData, userData }) {
+async function getUserData({ userId, setUserData, userData, auth }) {
   const querySnapshot = await getDocs(
     collection(firebase.db, `user-${userId}`)
   );

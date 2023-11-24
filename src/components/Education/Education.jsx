@@ -13,13 +13,11 @@ export const Education = ({ userData, setUserData, change }) => {
   });
   const [editData, setEditData] = useState(null);
 
-  console.log(editData);
-
   return (
     <section>
       <h2>Education</h2>
       {userData.education.length > 0 && (
-        <ul>
+        <ul style={{ display: "flex" }}>
           {userData.education.map((item) => {
             return (
               <li key={item.id}>
