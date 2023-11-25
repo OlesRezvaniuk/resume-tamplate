@@ -1,5 +1,17 @@
 import { useState, useEffect } from "react";
-import { FacebookIcon } from "./Social.styled";
+import {
+  SocialsContainer,
+  FacebookIcon,
+  LinkedinIcon,
+  TelegramIcon,
+  SocialInputsList,
+  SocialInputsListItem,
+  SocialInputItemName,
+  SocialLinkInput,
+  GithubIcon,
+  SocialLinkItem,
+  SocialLinksList,
+} from "./Social.styled";
 
 export const Social = ({ userData, setUserData, change }) => {
   const [editData, setEditData] = useState(null);
@@ -13,82 +25,69 @@ export const Social = ({ userData, setUserData, change }) => {
   }, [change]);
 
   return (
-    <div
-      style={{
-        background: "#425168",
-        height: 50,
-        position: "relative",
-        width: "100%",
-      }}
-    >
-      {editData && (
-        <div
-          style={{
-            position: "absolute",
-            left: 0,
-            top: "-50%",
-            background: "#425168",
-          }}
-        >
-          <ul>
-            {Object.keys(editData).map((item) => {
+    <SocialsContainer $isEdit={editData}>
+      {editData ? (
+        <SocialInputsList>
+          {Object.keys(editData).map((item) => {
+            return (
+              <SocialInputsListItem key={`editSocialData-${item}`}>
+                <SocialInputItemName style={{ color: "#fff" }}>
+                  {item}
+                </SocialInputItemName>
+                <SocialLinkInput
+                  type="text"
+                  name={item}
+                  value={editData[item]}
+                  onChange={(e) => {
+                    setEditData({ ...editData, [item]: e.target.value });
+                  }}
+                  onBlur={() => {
+                    setUserData({ ...userData, social: editData });
+                  }}
+                />
+              </SocialInputsListItem>
+            );
+          })}
+        </SocialInputsList>
+      ) : (
+        <SocialLinksList>
+          {Object.keys(userData.social).map((item) => {
+            if (userData.social[item] !== "") {
               return (
-                <li key={`editSocialData-${item}`}>
-                  <span style={{ color: "#fff" }}>{item}</span>
-                  {" - "}
-                  <input
-                    type="text"
-                    name={item}
-                    value={editData[item]}
-                    onChange={(e) => {
-                      setEditData({ ...editData, [item]: e.target.value });
-                    }}
-                    onBlur={() => {
-                      setUserData({ ...userData, social: editData });
+                <SocialLinkItem key={`socialLink-${item}`}>
+                  <a
+                    style={{ display: "flex", width: "100%", height: "100%" }}
+                    target="_blank"
+                    href={
+                      item === "telegram"
+                        ? `https://t.me/${userData.social[item]}`
+                        : `https://${userData.social[item]}`
+                    }
+                  >
+                    {item === "facebook" && <FacebookIcon title="" />}
+                    {item === "LinkedIn" && <LinkedinIcon title="" />}
+                    {item === "gitHub" && <GithubIcon title="" />}
+                    {item === "telegram" && <TelegramIcon title="" />}
+                  </a>
+                </SocialLinkItem>
+              );
+            } else {
+              return (
+                <SocialLinkItem key={`socialLink-${item}`} $load={true}>
+                  <div
+                    style={{
+                      width: 32,
+                      height: 32,
+                      background: "#425168",
+                      borderRadius: "3.3px",
                     }}
                   />
-                </li>
+                </SocialLinkItem>
               );
-            })}
-          </ul>
-          <button
-            onClick={() => {
-              console.log(editData);
-              setUserData({ ...userData, social: editData });
-              setEditData(null);
-            }}
-          >
-            confirm
-          </button>
-          <button
-            onClick={() => {
-              setEditData(null);
-            }}
-          >
-            cancel
-          </button>
-        </div>
+            }
+          })}
+        </SocialLinksList>
       )}
-      <ul style={{ display: "flex", gap: 20 }}>
-        {Object.keys(userData.social).map((item) => {
-          if (userData.social[item] !== "") {
-            return (
-              <li key={`socialLink-${item}`}>
-                <a
-                  target="_blank"
-                  href={
-                    item === "telegram"
-                      ? `https://t.me/${userData.social[item]}`
-                      : `https://${userData.social[item]}`
-                  }
-                >
-                  {item === "facebook" && <FacebookIcon title="" />}
-                </a>
-              </li>
-            );
-          }
-        })}
-      </ul>
-    </div>
+    </SocialsContainer>
   );
 };

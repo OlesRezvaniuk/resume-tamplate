@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const languagesLevel = [
   "Beginner",
@@ -22,10 +22,14 @@ export const Languages = ({ userData, setUserData, change }) => {
   const [editData, setEditData] = useState(null);
   const [editLanguage, setEditLanguage] = useState(false);
 
+  useEffect(() => {
+    change ? setEditData(userData.languages) : setEditData(null);
+  }, [change, userData.languages]);
+
   return (
     <div>
       <h2>Languages</h2>
-      {editData && (
+      {/* {editData && (
         <div>
           <input
             type="text"
@@ -81,8 +85,44 @@ export const Languages = ({ userData, setUserData, change }) => {
             cancel
           </button>
         </div>
+      )} */}
+      {editData && (
+        <div>
+          <ul>
+            {editData.map((item) => {
+              const index = editData.findIndex((i) => i.id === item.id);
+
+              return (
+                <li key={item.id}>
+                  <input
+                    type="text"
+                    name={`editLanguages-${item.id}`}
+                    value={editData[index].value}
+                    onChange={(e) => {
+                      const updateData = [...editData];
+                      updateData[index].value = e.target.value;
+                      setEditData(updateData);
+                    }}
+                  />
+                  <span>{item.level}</span>
+                  <button
+                    onClick={() => {
+                      const updateData = userData.languages.filter(
+                        (i) => i.id !== item.id
+                      );
+                      console.log("edit");
+                      setUserData({ ...userData, languages: updateData });
+                    }}
+                  >
+                    X
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       )}
-      {userData.languages.length > 0 && (
+      {/* {userData.languages.length > 0 && (
         <div>
           <ul>
             {userData.languages.map((item) => {
@@ -100,17 +140,6 @@ export const Languages = ({ userData, setUserData, change }) => {
                       >
                         edit
                       </button>
-                      <button
-                        onClick={() => {
-                          const updateData = userData.languages.filter(
-                            (item) => item.id !== editData.id
-                          );
-
-                          setUserData({ ...userData, languages: updateData });
-                        }}
-                      >
-                        X
-                      </button>
                     </div>
                   )}
                 </li>
@@ -118,7 +147,7 @@ export const Languages = ({ userData, setUserData, change }) => {
             })}
           </ul>
         </div>
-      )}
+      )} */}
       {change && (
         <button
           onClick={() => {

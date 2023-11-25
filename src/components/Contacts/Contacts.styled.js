@@ -6,7 +6,6 @@ export const ContactsContainer = styled.div`
 
 export const ContactTitle = styled.h2`
   margin-bottom: 8px;
-  color: #000;
   font-size: 22px;
   font-weight: 700;
   pointer-events: none;
@@ -42,11 +41,12 @@ export const ContactsInputsListItem = styled.li`
 
 export const ContactsInput = styled.input`
   cursor: pointer;
+  width: 100%;
 `;
 
 export const ContactInputItemName = styled.span`
   background: #425168;
-  width: 80px;
+  min-width: 85px;
   text-align: center;
   pointer-events: none;
   font-weight: 700;
@@ -55,7 +55,6 @@ export const ContactInputItemName = styled.span`
 
 export const ContactLink = styled.a`
   text-decoration: auto;
-  color: #000;
   position: relative;
   &:focus,
   &:hover {

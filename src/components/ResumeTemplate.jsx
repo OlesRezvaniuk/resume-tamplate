@@ -55,9 +55,10 @@ function ResumeTemplate() {
 
   useEffect(() => {
     if (change) {
-      setRestoreData(userData);
+      const restoreData = JSON.parse(JSON.stringify(userData));
+      setRestoreData(restoreData);
     }
-  }, [change]);
+  }, [!change]);
 
   useEffect(() => {
     auth &&

@@ -68,7 +68,7 @@ export const Contacts = ({ userData, setUserData, change }) => {
               return (
                 <ContactsInputsListItem key={`editContacts-${item}`}>
                   <ContactInputItemName>{item}</ContactInputItemName>
-                  {" - "}
+
                   <ContactsInput
                     type="text"
                     name={item}
