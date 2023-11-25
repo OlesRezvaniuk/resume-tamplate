@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/resume-template/static/css/main.4d2f2848.css",
-    "main.js": "/resume-template/static/js/main.f5519d8c.js",
+    "main.js": "/resume-template/static/js/main.e2c4b70d.js",
     "static/media/github.svg": "/resume-template/static/media/github.de0523924cec8524e47759c347a1e330.svg",
     "static/media/cross.svg": "/resume-template/static/media/cross.d5ab96da0d54fcdcdcde3e1f38b2c478.svg",
     "index.html": "/resume-template/index.html",
@@ -12,10 +12,10 @@
     "static/media/delete.svg": "/resume-template/static/media/delete.7bb463f7e69af9f46aab468515c1cba1.svg",
     "static/media/checkmark.svg": "/resume-template/static/media/checkmark.2f4b8fdae8d0f856637f73e76118ded2.svg",
     "main.4d2f2848.css.map": "/resume-template/static/css/main.4d2f2848.css.map",
-    "main.f5519d8c.js.map": "/resume-template/static/js/main.f5519d8c.js.map"
+    "main.e2c4b70d.js.map": "/resume-template/static/js/main.e2c4b70d.js.map"
   },
   "entrypoints": [
     "static/css/main.4d2f2848.css",
-    "static/js/main.f5519d8c.js"
+    "static/js/main.e2c4b70d.js"
   ]
 }
