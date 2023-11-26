@@ -8,6 +8,7 @@ export const TechSkillsContainer = styled.div`
   padding: 0px 30px;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 export const TechSkillsTitle = styled.h2`
@@ -23,7 +24,9 @@ export const TechSkillsAddButton = styled.button`
   color: #fff;
   transition: 250ms;
   cursor: pointer;
-  margin-top: 8px;
+  position: absolute;
+  bottom: -23px;
+  right: 30px;
   &:hover,
   &:focus {
     background: #fff;

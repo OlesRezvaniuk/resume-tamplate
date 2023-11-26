@@ -13,6 +13,7 @@ import {
   SoftSkillAddInputBox,
   CheckmarkIcon,
   CrossIcon,
+  SoftSkillsTitle,
 } from "./SoftSkills.styled";
 
 export const SoftSkills = ({ userData, setUserData, change }) => {
@@ -25,11 +26,9 @@ export const SoftSkills = ({ userData, setUserData, change }) => {
     !change && setTemplateData({ state: false, value: "" });
   }, [change, userData.softSkills]);
 
-  console.log(editData);
-
   return (
-    <SoftSkillsContainer>
-      <h2>Soft Skills</h2>
+    <SoftSkillsContainer $change={change}>
+      <SoftSkillsTitle>Soft Skills</SoftSkillsTitle>
       {change && editData ? (
         <SoftSkillsList>
           {editData.map((item) => {
@@ -61,7 +60,10 @@ export const SoftSkills = ({ userData, setUserData, change }) => {
           {userData.softSkills.map((item) => {
             return (
               <li
-                style={{ display: "flex", alignItems: "center" }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
                 key={item.id}
               >
                 <p>{item.value}</p>

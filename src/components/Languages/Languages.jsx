@@ -1,5 +1,18 @@
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
+import {
+  LanguagesContainer,
+  LanguagesTitle,
+  LanguagesAddButton,
+  DeleteIcon,
+  LanguageItemEditButton,
+  LanguagesSkillsListItem,
+  LanguagesEditInputList,
+  LanguagesEditInput,
+  LanguagesEditLevelList,
+  LanguagesEditLevelItemButton,
+  LanguagesEditSetLevelButton,
+} from "./Languages.styled";
 
 const languagesLevel = [
   "Beginner",
@@ -20,81 +33,57 @@ export const Languages = ({ userData, setUserData, change }) => {
     setLevel: false,
   });
   const [editData, setEditData] = useState(null);
-  const [editLanguage, setEditLanguage] = useState(false);
+  const [modalSetLevel, setModalSetLevel] = useState(false);
 
   useEffect(() => {
-    change ? setEditData(userData.languages) : setEditData(null);
+    if (change) {
+      setEditData(userData.languages);
+    } else {
+      setTemplateData({ ...templateData, state: false });
+      setEditData(null);
+
+      userData.languages.map((item) => {
+        item.setLevel === true && reset(item);
+      });
+    }
   }, [change, userData.languages]);
 
+  function reset(item) {
+    const updateData = [...userData.languages];
+    const index = updateData.findIndex((i) => i.id === item.id);
+    updateData[index].setLevel = false;
+    setUserData({ ...userData, languages: updateData });
+  }
+
   return (
-    <div>
-      <h2>Languages</h2>
-      {/* {editData && (
-        <div>
-          <input
-            type="text"
-            name={`editLanguages-${editData.id}`}
-            value={editData.value}
-            onChange={(e) => {
-              setEditData({ ...editData, value: e.target.value });
-            }}
-          />
-          {" - "}
-          <button
-            onClick={() => {
-              setEditLanguage(true);
-            }}
-          >
-            {editData.level}
-          </button>
-          {editLanguage && (
-            <ul>
-              {languagesLevel.map((item) => {
-                return (
-                  <li key={`editLanguages-${item}-edit`}>
-                    <button
-                      onClick={() => {
-                        setEditData({ ...editData, level: item });
-                        setEditLanguage(false);
-                      }}
-                    >
-                      {item}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-          <br />
-          <button
-            onClick={() => {
-              const updateData = userData.languages;
-              const index = updateData.findIndex((i) => i.id === editData.id);
-              updateData[index] = editData;
-              setUserData({ ...userData, languages: updateData });
-              setEditData(null);
-            }}
-          >
-            confirm
-          </button>
-          <button
-            onClick={() => {
-              setEditData(null);
-            }}
-          >
-            cancel
-          </button>
-        </div>
-      )} */}
+    <LanguagesContainer>
+      <LanguagesTitle>Languages</LanguagesTitle>
+
+      {userData.languages.length > 0 && !change && (
+        <ul style={{ listStyle: "none" }}>
+          {userData.languages.map((item) => {
+            return (
+              <li key={item.id}>
+                <span>{item.value}</span>
+                {item.level !== "" && " - "}
+                <span>{item.level}</span>
+              </li>
+            );
+          })}
+        </ul>
+      )}
       {editData && (
         <div>
-          <ul>
+          <LanguagesEditInputList>
             {editData.map((item) => {
               const index = editData.findIndex((i) => i.id === item.id);
-
+              const updateData = [...editData];
               return (
-                <li key={item.id}>
-                  <input
+                <LanguagesSkillsListItem
+                  key={item.id}
+                  $setLevel={item.setLevel}
+                >
+                  <LanguagesEditInput
                     type="text"
                     name={`editLanguages-${item.id}`}
                     value={editData[index].value}
@@ -104,22 +93,57 @@ export const Languages = ({ userData, setUserData, change }) => {
                       setEditData(updateData);
                     }}
                   />
-                  <span>{item.level}</span>
-                  <button
+                  <LanguagesEditSetLevelButton
+                    onClick={() => {
+                      const some = editData.some(
+                        (i) => i.setLevel !== item.setLevel
+                      );
+                      if (some) {
+                        return;
+                      } else {
+                        updateData[index].setLevel = true;
+                        setEditData(updateData);
+                      }
+                    }}
+                  >
+                    {item.level ? item.level : "level?"}
+                  </LanguagesEditSetLevelButton>
+                  {item.setLevel && (
+                    <LanguagesEditLevelList>
+                      {languagesLevel.map((item) => {
+                        return (
+                          <li
+                            key={`editLanguagesLevel-${item}`}
+                            style={{ display: "flex" }}
+                          >
+                            <LanguagesEditLevelItemButton
+                              onClick={async () => {
+                                updateData[index].level = item;
+                                updateData[index].setLevel = false;
+                                await setEditData(updateData);
+                              }}
+                            >
+                              {item}
+                            </LanguagesEditLevelItemButton>
+                          </li>
+                        );
+                      })}
+                    </LanguagesEditLevelList>
+                  )}
+                  <LanguageItemEditButton
                     onClick={() => {
                       const updateData = userData.languages.filter(
                         (i) => i.id !== item.id
                       );
-                      console.log("edit");
                       setUserData({ ...userData, languages: updateData });
                     }}
                   >
-                    X
-                  </button>
-                </li>
+                    <DeleteIcon />
+                  </LanguageItemEditButton>
+                </LanguagesSkillsListItem>
               );
             })}
-          </ul>
+          </LanguagesEditInputList>
         </div>
       )}
       {/* {userData.languages.length > 0 && (
@@ -149,13 +173,13 @@ export const Languages = ({ userData, setUserData, change }) => {
         </div>
       )} */}
       {change && (
-        <button
+        <LanguagesAddButton
           onClick={() => {
             setTemplateData({ ...templateData, state: true });
           }}
         >
-          add
-        </button>
+          +
+        </LanguagesAddButton>
       )}
       {templateData.state && (
         <div>
@@ -235,6 +259,6 @@ export const Languages = ({ userData, setUserData, change }) => {
           </button>
         </div>
       )}
-    </div>
+    </LanguagesContainer>
   );
 };

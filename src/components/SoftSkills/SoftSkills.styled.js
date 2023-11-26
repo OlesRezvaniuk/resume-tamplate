@@ -12,6 +12,9 @@ export const SoftSkillsAddButton = styled.button`
   transition: 250ms;
   cursor: pointer;
   margin-top: 8px;
+  position: absolute;
+  bottom: -23px;
+  right: 30px;
   &:hover,
   &:focus {
     background: #fff;
@@ -20,10 +23,18 @@ export const SoftSkillsAddButton = styled.button`
   }
 `;
 
+export const SoftSkillsTitle = styled.h2`
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  margin-bottom: 8px;
+`;
+
 export const SoftSkillsContainer = styled.div`
   padding: 0px 30px;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 export const DeleteIcon = styled(DeleteIconPrimal)`

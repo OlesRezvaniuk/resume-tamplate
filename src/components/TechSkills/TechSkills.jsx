@@ -71,7 +71,7 @@ export const TechSkills = ({ userData, setUserData, change }) => {
             <TechSkillsList>
               {userData.techSkills.map((item) => {
                 return (
-                  <li key={item.id}>
+                  <li style={{ height: "19.5px" }} key={item.id}>
                     <span>{item.value}</span>
                   </li>
                 );

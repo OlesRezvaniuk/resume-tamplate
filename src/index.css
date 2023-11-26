@@ -8,6 +8,10 @@ body {
   font-family: Montserrat;
 }
 
+body ::-webkit-scrollbar {
+  display: none; /* Для WebKit браузерів (Chrome, Safari) */
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
