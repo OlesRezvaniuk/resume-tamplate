@@ -33,7 +33,6 @@ export const TelegramIcon = styled(TelegramIconPrimal)`
 
 export const SocialInputsListItem = styled.li`
   padding: 0px 0px 0px 10px;
-  height: 20px;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
@@ -44,6 +43,10 @@ export const SocialInputsListItem = styled.li`
   &:hover,
   &:focus {
     box-shadow: 0px 0px 0px 1px grey;
+  }
+  height: 26px;
+  @media screen and (min-width: 1260px) {
+    height: 20px;
   }
 `;
 
@@ -65,12 +68,11 @@ export const SocialInputsList = styled.ul`
 `;
 
 export const SocialInputItemName = styled.span`
-  background: #425168;
-  min-width: 85px;
-  text-align: center;
-  pointer-events: none;
-  font-weight: 700;
-  color: #fff;
+  height: 20px;
+  margin-right: 1px;
+  @media screen and (min-width: 1260px) {
+    height: 18px;
+  }
 `;
 
 export const SocialLinkItem = styled.li`

@@ -11,6 +11,7 @@ import {
   LocationIcon,
   TelIcon,
   EmailIcon,
+  ContactListItem,
 } from "./Contacts.styled";
 
 export const Contacts = ({ userData, setUserData, change }) => {
@@ -32,7 +33,7 @@ export const Contacts = ({ userData, setUserData, change }) => {
           {Object.keys(userData.contacts).map((item) => {
             if (item === "tel" || item === "email") {
               return (
-                <li key={`contacts-${item}`} style={{ height: 20 }}>
+                <ContactListItem key={`contacts-${item}`}>
                   {userData.contacts[item] !== "" ? (
                     <ContactLink
                       href={
@@ -46,11 +47,11 @@ export const Contacts = ({ userData, setUserData, change }) => {
                   ) : (
                     <div style={{ height: "19.5px", background: "#425168" }} />
                   )}
-                </li>
+                </ContactListItem>
               );
             } else {
               return (
-                <li key={`contacts-${item}`}>
+                <ContactListItem key={`contacts-${item}`}>
                   {userData.contacts[item] !== "" ? (
                     <span style={{ pointerEvents: "none" }}>
                       {userData.contacts[item]}
@@ -58,7 +59,7 @@ export const Contacts = ({ userData, setUserData, change }) => {
                   ) : (
                     <div style={{ height: "19.5px", background: "#425168" }} />
                   )}
-                </li>
+                </ContactListItem>
               );
             }
           })}

@@ -67,13 +67,20 @@ export const LanguagesAddButton = styled.button`
   cursor: pointer;
   margin-top: 8px;
   position: absolute;
-  bottom: -24px;
+  bottom: -30px;
   right: 30px;
   &:hover,
   &:focus {
     background: #fff;
     color: #425168;
     outline: 1px solid #425168;
+  }
+  height: 26px;
+  width: 26px;
+  @media screen and (min-width: 1260px) {
+    bottom: -24px;
+    width: 20px;
+    height: 20px;
   }
 `;
 
@@ -114,6 +121,12 @@ export const LanguageItemEditButton = styled.button`
     fill: #425168;
     background: #fff;
     outline: 1px solid #425168;
+  }
+  height: 26px;
+  width: 26px;
+  @media screen and (min-width: 1260px) {
+    width: 20px;
+    height: 20px;
   }
 `;
 

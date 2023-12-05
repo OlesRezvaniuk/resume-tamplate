@@ -200,7 +200,14 @@ export const AddWorkExperience = ({
         <AddWorkExperienceButtonsBox>
           <AddWorkExperienceAddButton
             onClick={() => {
-              setTemplateData({ ...templateData, state: !templateData.state });
+              setUserData({
+                ...userData,
+                workExperience: [
+                  ...userData.workExperience,
+                  { id: nanoid(), ...templateData.data },
+                ],
+              });
+              // setTemplateData({ ...templateData, state: !templateData.state });
             }}
           >
             +

@@ -18,7 +18,7 @@ export const WorkExperiencePosition = styled.span`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  color: ${(props) => (props.$variant ? "blue" : "inherit")};
+  color: ${(props) => (props.$variant ? "#2e9aff" : "inherit")};
 `;
 
 export const WorkExperienceYear = styled.span`

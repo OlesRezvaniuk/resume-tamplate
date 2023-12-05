@@ -18,33 +18,118 @@ import { SoftSkills } from "./SoftSkills/SoftSkills";
 import { Languages } from "./Languages/Languages";
 import { Main } from "./Main/Main";
 import { Aside } from "./Aside/Aside";
+import { nanoid } from "@reduxjs/toolkit";
+import { ResumeTemplateContainer } from "./ResumeTemplate.styled";
 
 function ResumeTemplate() {
   const { auth } = useSelector(authSelector);
-  const [change, setChange] = useState(false);
+  const [change, setChange] = useState(true);
   const [restoreData, setRestoreData] = useState(null);
   const [userData, setUserData] = useState({
     specialty: "you'r specialty",
-    name: "",
-    info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit, quidem iste consequuntur laudantium vitae aliquid impedit iusto magni facere, voluptatum enim perferendis recusandae quasi molestiae totam illo eius temporibus ab inventore non nisi cumque quisquam. Similique quasi vero cumque sequi a, nulla ut? Autem esse dolorum nobis! Pariatur blanditiis eius dolorum doloribus tempore voluptatum quis, repudiandae eveniet ex dicta! A nemo, illum eum ipsum consequatur vitae maxime deserunt asperiores.",
-    projects: [],
-    selectedProjects: [],
-    workExperience: [],
-    education: [],
+    name: "you'r name",
+    info: "Describe your work experience and your preferences...",
+    projects: [
+      {
+        gitLink: "https://github.com/",
+        lifeLink: "https://olesrezvaniuk.github.io/resume-template/",
+        id: nanoid(),
+        name: "Project #1",
+        technology: "project technology",
+        info: "Describe this project in more detail",
+      },
+      {
+        gitLink: "https://github.com/",
+        lifeLink: "https://olesrezvaniuk.github.io/resume-template/",
+        id: nanoid(),
+        name: "Project #2",
+        technology: "project technology",
+        info: "Describe this project in more detail",
+      },
+      {
+        gitLink: "https://github.com/",
+        lifeLink: "https://olesrezvaniuk.github.io/resume-template/",
+        id: nanoid(),
+        name: "Project #3",
+        technology: "project technology",
+        info: "Describe this project in more detail",
+      },
+      {
+        gitLink: "https://github.com/",
+        lifeLink: "https://olesrezvaniuk.github.io/resume-template/",
+        id: nanoid(),
+        name: "Project #4",
+        technology: "project technology",
+        info: "Describe this project in more detail",
+      },
+    ],
+    workExperience: [
+      {
+        startYear: "0000",
+        endYear: "0000",
+        company: "Company #1",
+        position: "Position #1",
+        responsibilities: [{ id: nanoid(), value: "responsibilities #1" }],
+        id: nanoid(),
+      },
+      {
+        startYear: "0000",
+        endYear: "0000",
+        company: "Company #2",
+        position: "Position #2",
+        responsibilities: [{ id: nanoid(), value: "responsibilities #2" }],
+        id: nanoid(),
+      },
+    ],
+    education: [
+      {
+        startYear: "0000",
+        endYear: "0000",
+        name: "Institution #1",
+        position: "Position #1",
+        id: nanoid(),
+      },
+      {
+        startYear: "0000",
+        endYear: "0000",
+        name: "Institution #2",
+        position: "Position #2",
+        id: nanoid(),
+      },
+    ],
     contacts: {
-      tel: "",
-      email: "",
-      city: "",
+      tel: "+000000000000",
+      email: "yourEmail@gmail.com",
+      city: "yourCity",
     },
     social: {
-      facebook: "",
-      telegram: "",
-      gitHub: "",
-      LinkedIn: "",
+      facebook: "facebookLink",
+      telegram: "telegramLink",
+      gitHub: "githubLink",
+      LinkedIn: "LinkedinLink",
     },
-    techSkills: [],
-    softSkills: [],
-    languages: [],
+    techSkills: [
+      { id: nanoid(), value: "tech skill #1" },
+      { id: nanoid(), value: "tech skill #2" },
+      { id: nanoid(), value: "tech skill #3" },
+      { id: nanoid(), value: "tech skill #4" },
+      { id: nanoid(), value: "tech skill #5" },
+      { id: nanoid(), value: "tech skill #6" },
+    ],
+    softSkills: [
+      { id: nanoid(), value: "soft skill #1" },
+      { id: nanoid(), value: "soft skill #2" },
+      { id: nanoid(), value: "soft skill #3" },
+      { id: nanoid(), value: "soft skill #4" },
+      { id: nanoid(), value: "soft skill #5" },
+      { id: nanoid(), value: "soft skill #6" },
+    ],
+    languages: [
+      { id: nanoid(), value: "Language #1", level: "level?" },
+      { id: nanoid(), value: "Language #2", level: "level?" },
+      { id: nanoid(), value: "Language #3", level: "level?" },
+      { id: nanoid(), value: "Language #4", level: "level?" },
+    ],
     avatar: null,
   });
 
@@ -74,9 +159,21 @@ function ResumeTemplate() {
     firebaseRequests.postUserData({ userId: auth.uid, userData });
   }
 
+  // const saveHTMLasPDF = () => {
+  //   const element = document.getElementById("root"); // Замініть 'yourHTMLContent' на ідентифікатор вашого HTML вмісту
+  //   html2pdf(element);
+  // };
+
   return (
-    <div style={{ maxWidth: 1200, margin: 30 }}>
+    <ResumeTemplateContainer>
       <div>
+        <button
+          onClick={() => {
+            window.print();
+          }}
+        >
+          PRINT
+        </button>
         <button
           onClick={() => {
             firebaseRequests.getUserData({ userId: auth.uid, setUserData });
@@ -107,6 +204,8 @@ function ResumeTemplate() {
       <div
         style={{
           display: "flex",
+          justifyContent: "center",
+          boxShadow: "0px 0px 10px lightgrey",
         }}
       >
         <Aside userData={userData} change={change} setUserData={setUserData} />
@@ -117,7 +216,7 @@ function ResumeTemplate() {
           setChange={setChange}
         />
       </div>
-    </div>
+    </ResumeTemplateContainer>
   );
 }
 

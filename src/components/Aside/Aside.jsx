@@ -4,20 +4,11 @@ import { Social } from "../Social/Social";
 import { TechSkills } from "../TechSkills/TechSkills";
 import { SoftSkills } from "../SoftSkills/SoftSkills";
 import { Languages } from "../Languages/Languages";
+import { AsideContainer } from "./Aside.styled";
 
 export const Aside = ({ userData, setUserData, change }) => {
   return (
-    <aside
-      style={{
-        width: 370,
-        display: "flex",
-        flexDirection: "column",
-        gap: 40,
-        paddingBottom: 40,
-        background: "#eceef2",
-        minHeight: 1200,
-      }}
-    >
+    <AsideContainer>
       <Avatar userData={userData} setUserData={setUserData} change={change} />
       <Contacts userData={userData} setUserData={setUserData} change={change} />
       <Social userData={userData} setUserData={setUserData} change={change} />
@@ -36,6 +27,6 @@ export const Aside = ({ userData, setUserData, change }) => {
         setUserData={setUserData}
         change={change}
       />
-    </aside>
+    </AsideContainer>
   );
 };

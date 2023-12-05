@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const AvatarContainer = styled.div`
   width: inherit;
   position: relative;
-  height: 370px;
 `;
 
 export const AvatarImg = styled.img`
@@ -11,6 +10,9 @@ export const AvatarImg = styled.img`
   height: 370px;
   object-fit: cover;
   border-radius: 4px;
+  @media screen and (min-width: 768px) {
+    height: 370px;
+  }
 `;
 
 export const AvatarPlugBox = styled.div`

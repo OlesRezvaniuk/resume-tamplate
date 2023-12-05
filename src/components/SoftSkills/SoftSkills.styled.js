@@ -13,13 +13,20 @@ export const SoftSkillsAddButton = styled.button`
   cursor: pointer;
   margin-top: 8px;
   position: absolute;
-  bottom: -24px;
+  bottom: -30px;
   right: 30px;
   &:hover,
   &:focus {
     background: #fff;
     color: #425168;
     outline: 1px solid #425168;
+  }
+  height: 26px;
+  width: 26px;
+  @media screen and (min-width: 1260px) {
+    bottom: -24px;
+    width: 20px;
+    height: 20px;
   }
 `;
 
@@ -58,11 +65,17 @@ export const CrossIcon = styled(CrossIconPrimal)`
   margin-bottom: 1px;
 `;
 
+export const SoftSkillsListInput = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: disc;
+`;
 export const SoftSkillsList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  list-style: none;
+  margin-left: 15px;
 `;
 
 export const SoftSkillsListItem = styled.li`
@@ -71,10 +84,15 @@ export const SoftSkillsListItem = styled.li`
   justify-content: space-between;
   box-shadow: 0px 0px 0px 1px lightgrey;
   border-radius: 2px;
+
   transition: 250ms;
   &:hover,
   &:focus {
     box-shadow: 0px 0px 0px 1px grey;
+  }
+  height: 26px;
+  @media screen and (min-width: 1260px) {
+    height: 20px;
   }
 `;
 
@@ -99,6 +117,12 @@ export const SoftSkillsItemEditButton = styled.button`
     fill: #425168;
     background: #fff;
     outline: 1px solid #425168;
+  }
+  height: 26px;
+  width: 26px;
+  @media screen and (min-width: 1260px) {
+    width: 20px;
+    height: 20px;
   }
 `;
 

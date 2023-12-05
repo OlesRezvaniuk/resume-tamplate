@@ -36,6 +36,7 @@ export const EditWorkExperience = ({
                     >
                       <EditWorkExperienceInput
                         type="text"
+                        placeholder={`you'r ${key}`}
                         name={`editWorkExperienceInput-${key}`}
                         value={editWorkExperience[index][key]}
                         onChange={(e) => {
@@ -67,6 +68,7 @@ export const EditWorkExperience = ({
                       <EditWorkExperienceInput
                         $tp={true}
                         type="text"
+                        placeholder="you'r responsibilities"
                         name={`editResponsibilities-${item.id}`}
                         value={
                           editWorkExperience[index].responsibilities[resIndx]
@@ -118,7 +120,14 @@ export const EditWorkExperience = ({
                 +
               </AddResponsibilities>
             </ResponsibilitiesBox>
-            <DeleteButton>
+            <DeleteButton
+              onClick={() => {
+                const updateData = editWorkExperience.filter(
+                  (obj) => obj.id !== item.id
+                );
+                setUserData({ ...userData, workExperience: updateData });
+              }}
+            >
               <DeleteIcon />
             </DeleteButton>
           </EditWorkExperienceItem>

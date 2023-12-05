@@ -50,10 +50,17 @@ export const AddProject = ({ change, userData, setUserData }) => {
 
   return (
     <div>
-      {change && !templateData.state && userData.projects.length <= 3 && (
+      {change && userData.projects.length <= 3 && (
         <AddButton
           onClick={() => {
-            setTemplateData({ ...templateData, state: !templateData.state });
+            // setTemplateData({ ...templateData, state: true });
+            setUserData({
+              ...userData,
+              projects: [
+                ...userData.projects,
+                { id: nanoid(), ...templateData.data },
+              ],
+            });
           }}
         >
           +
@@ -107,7 +114,7 @@ export const AddProject = ({ change, userData, setUserData }) => {
               });
             }}
           />
-          <AddProjectButtonsBox>
+          {/* <AddProjectButtonsBox>
             <AddProjectsConfirmButton
               onClick={() => {
                 if (userData.projects.length >= 4) {
@@ -135,7 +142,7 @@ export const AddProject = ({ change, userData, setUserData }) => {
             >
               <CrossIcon />
             </AddProjectsConfirmButton>
-          </AddProjectButtonsBox>
+          </AddProjectButtonsBox> */}
         </AddProjectContainer>
       )}
     </div>

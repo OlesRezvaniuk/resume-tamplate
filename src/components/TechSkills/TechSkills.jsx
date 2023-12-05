@@ -20,7 +20,7 @@ import {
 
 export const TechSkills = ({ userData, setUserData, change }) => {
   const [templateData, setTemplateData] = useState({ state: false, value: "" });
-  const [editData, setEditData] = useState(null);
+  const [editData, setEditData] = useState(userData.techSkills);
 
   useEffect(() => {
     change ? setEditData(userData.techSkills) : setEditData(null);
@@ -29,7 +29,7 @@ export const TechSkills = ({ userData, setUserData, change }) => {
   }, [change, userData.techSkills]);
 
   return (
-    <TechSkillsContainer>
+    <TechSkillsContainer $edit={change}>
       <TechSkillsTitle>TechSkills</TechSkillsTitle>
       {change ? (
         <TechSkillsList>
@@ -91,38 +91,16 @@ export const TechSkills = ({ userData, setUserData, change }) => {
               setTemplateData({ ...templateData, value: e.target.value });
             }}
           />
-          <TechSkillsAddButtonBox>
-            <TechSkillsAddButtonVariant
-              onClick={() => {
-                setUserData({
-                  ...userData,
-                  techSkills: [
-                    ...userData.techSkills,
-                    { id: nanoid(), value: templateData.value },
-                  ],
-                });
-                setTemplateData({ state: false, value: "" });
-              }}
-            >
-              <CheckmarkIcon title="" />
-            </TechSkillsAddButtonVariant>
-            <TechSkillsAddButtonVariant
-              onClick={() => {
-                setTemplateData({ state: false, value: "" });
-              }}
-            >
-              <CrossIcon title="" />
-            </TechSkillsAddButtonVariant>
-          </TechSkillsAddButtonBox>
         </TechSkillAddInputBox>
       )}
 
-      {change && !templateData.state && (
+      {change && (
         <TechSkillsAddButton
           onClick={async () => {
-            await setTemplateData({ ...templateData, state: true });
-            const input = document.getElementById("techSkillsAddInput");
-            input.focus();
+            setUserData({
+              ...userData,
+              techSkills: [...userData.techSkills, { id: nanoid(), value: "" }],
+            });
           }}
         >
           +

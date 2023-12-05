@@ -6,6 +6,7 @@ import {
   DeleteIcon,
   SoftSkillsItemEditButton,
   SoftSkillsListItem,
+  SoftSkillsListInput,
   SoftSkillsList,
   SoftSkillsInput,
   SoftSkillsAddButtonBox,
@@ -19,7 +20,7 @@ import {
 
 export const SoftSkills = ({ userData, setUserData, change }) => {
   const [templateData, setTemplateData] = useState({ state: false, value: "" });
-  const [editData, setEditData] = useState(null);
+  const [editData, setEditData] = useState(userData.softSkills);
 
   useEffect(() => {
     change ? setEditData(userData.softSkills) : setEditData(null);
@@ -31,7 +32,7 @@ export const SoftSkills = ({ userData, setUserData, change }) => {
     <SoftSkillsContainer $change={change}>
       <SoftSkillsTitle>Soft Skills</SoftSkillsTitle>
       {change && editData ? (
-        <SoftSkillsList>
+        <SoftSkillsListInput>
           {editData.map((item) => {
             const index = editData.findIndex((i) => i.id === item.id);
             return (
@@ -62,18 +63,12 @@ export const SoftSkills = ({ userData, setUserData, change }) => {
               </SoftSkillsListItem>
             );
           })}
-        </SoftSkillsList>
+        </SoftSkillsListInput>
       ) : (
-        <ul style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+        <SoftSkillsList>
           {userData.softSkills.map((item) => {
             return (
-              <li
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                }}
-                key={item.id}
-              >
+              <li key={item.id}>
                 <p style={{ pointerEvents: "none" }}>{item.value}</p>
                 {change && (
                   <SoftSkillsAddButtonBox>
@@ -103,7 +98,7 @@ export const SoftSkills = ({ userData, setUserData, change }) => {
               </li>
             );
           })}
-        </ul>
+        </SoftSkillsList>
       )}
 
       {templateData.state && (
@@ -117,7 +112,7 @@ export const SoftSkills = ({ userData, setUserData, change }) => {
               setTemplateData({ ...templateData, value: e.target.value });
             }}
           />
-          <SoftSkillsAddButtonBox>
+          {/* <SoftSkillsAddButtonBox>
             <SoftSkillsAddButtonVariant
               onClick={() => {
                 setUserData({
@@ -139,15 +134,19 @@ export const SoftSkills = ({ userData, setUserData, change }) => {
             >
               <CrossIcon title="" />
             </SoftSkillsAddButtonVariant>
-          </SoftSkillsAddButtonBox>
+          </SoftSkillsAddButtonBox> */}
         </SoftSkillAddInputBox>
       )}
       {change && !templateData.state && (
         <SoftSkillsAddButton
           onClick={async () => {
-            await setTemplateData({ ...templateData, state: true });
-            const input = document.getElementById("techSkillsAddInput");
-            input.focus();
+            // await setTemplateData({ ...templateData, state: true });
+            // const input = document.getElementById("techSkillsAddInput");
+            // input.focus();
+            setUserData({
+              ...userData,
+              softSkills: [...userData.softSkills, { id: nanoid(), value: "" }],
+            });
           }}
         >
           +

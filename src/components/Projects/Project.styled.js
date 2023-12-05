@@ -19,11 +19,12 @@ export const ProjectLink = styled.a`
   line-height: 24px;
 `;
 
-export const ProjectsList = styled.ul`
+export const ProjectsList = styled.ol`
   display: flex;
   flex-direction: column;
   gap: 8px;
   display: grid;
+  list-style-position: inside;
 `;
 
 export const ProjectText = styled.p`
@@ -37,4 +38,7 @@ export const ProjectText = styled.p`
 export const ProjectItem = styled.li`
   overflow: hidden;
   height: 100px;
+  &::marker {
+    font-weight: 700;
+  }
 `;

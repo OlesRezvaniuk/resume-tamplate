@@ -7,17 +7,29 @@ export const TelIcon = styled(TelIconPrimal)`
   width: 18px;
   height: 18px;
   fill: inherit;
+  @media screen and (max-width: 1259px) {
+    width: 22px;
+    height: 22px;
+  }
 `;
 export const EmailIcon = styled(EmailIconPrimal)`
   width: 18px;
   height: 18px;
   fill: inherit;
+  @media screen and (max-width: 1259px) {
+    width: 22px;
+    height: 22px;
+  }
 `;
 
 export const LocationIcon = styled(LocationIconPrimal)`
   width: 18px;
   height: 18px;
   fill: inherit;
+  @media screen and (max-width: 1259px) {
+    width: 22px;
+    height: 22px;
+  }
 `;
 
 export const ContactsContainer = styled.div`
@@ -52,13 +64,16 @@ export const ContactsInputsListItem = styled.li`
   justify-content: space-between;
   box-shadow: 0px 0px 0px 1px lightgrey;
   border-radius: 2px;
-  height: 20px;
   transition: 250ms;
   fill: #425168;
   &:hover,
   &:focus {
     box-shadow: 0px 0px 0px 1px grey;
     fill: #425168;
+  }
+  height: 26px;
+  @media screen and (min-width: 1260px) {
+    height: 20px;
   }
 `;
 
@@ -69,6 +84,8 @@ export const ContactsInput = styled.input`
 `;
 
 export const ContactInputType = styled.span`
+align-items: center;
+  display: flex;
   background: none;
   text-align: center;
   pointer-events: none;
@@ -84,5 +101,12 @@ export const ContactLink = styled.a`
   &:focus,
   &:hover {
     text-decoration: underline;
+  }
+`;
+
+export const ContactListItem = styled.li`
+  height: 26px;
+  @media screen and (min-width: 1260px) {
+    height: 20px;
   }
 `;

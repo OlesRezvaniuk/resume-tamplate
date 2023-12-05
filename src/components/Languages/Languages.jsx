@@ -68,7 +68,8 @@ export const Languages = ({ userData, setUserData, change }) => {
       {userData.languages.length > 0 && !change && (
         <ul
           style={{
-            listStyle: "none",
+            listStyle: "disc",
+            listStylePosition: "inside",
             display: "flex",
             flexDirection: "column",
             gap: 4,

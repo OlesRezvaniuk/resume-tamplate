@@ -41,7 +41,7 @@ export const Education = ({ userData, setUserData, change }) => {
           {userData.education.map((item) => {
             return (
               <li key={item.id}>
-                <h3>{item.name}</h3>
+                <h3 style={{ color: "#2e9aff" }}>{item.name}</h3>
                 <span>
                   {item.startYear}
                   {" - "}

@@ -46,7 +46,6 @@ export const Projects = ({ userData, setUserData, change }) => {
   return (
     <div
       style={{
-        maxWidth: 710,
         overflowWrap: "break-word",
         position: "relative",
         marginBottom: 35,

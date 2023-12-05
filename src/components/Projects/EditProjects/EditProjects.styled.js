@@ -36,7 +36,7 @@ export const EditProjectsList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  list-style: none;
+  // list-style: none;
 `;
 
 export const EditProjectsListItem = styled.li`

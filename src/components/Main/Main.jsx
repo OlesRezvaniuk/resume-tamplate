@@ -8,9 +8,7 @@ import { MainContainer } from "./Main.styled";
 
 export const Main = ({ userData, setUserData, change, setChange }) => {
   return (
-    <MainContainer
-      style={{ display: "flex", flexDirection: "column", width: "100%" }}
-    >
+    <MainContainer>
       <Specialty
         usersData={userData}
         change={change}

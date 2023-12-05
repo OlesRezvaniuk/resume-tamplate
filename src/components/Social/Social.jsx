@@ -31,7 +31,7 @@ export const Social = ({ userData, setUserData, change }) => {
           {Object.keys(editData).map((item) => {
             return (
               <SocialInputsListItem key={`editSocialData-${item}`}>
-                <span style={{ height: 18, marginRight: 1 }}>
+                <SocialInputItemName>
                   {item === "facebook" && (
                     <FacebookIcon $editIcon="true" title="" />
                   )}
@@ -44,7 +44,7 @@ export const Social = ({ userData, setUserData, change }) => {
                   {item === "telegram" && (
                     <TelegramIcon $editIcon="true" title="" />
                   )}
-                </span>
+                </SocialInputItemName>
                 <SocialLinkInput
                   type="text"
                   name={item}
