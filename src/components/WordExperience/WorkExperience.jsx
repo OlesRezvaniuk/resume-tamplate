@@ -1,5 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { nanoid } from "@reduxjs/toolkit";
+import {
+  WorkExperienceContainer,
+  WorkExperienceTitle,
+  WorkExperiencePosition,
+  WorkExperienceYear,
+  WorkExperienceResponsibilitiesText,
+  WorkExperienceREsponsibilitiesList,
+  WorkExperienceList,
+  WorkExperienceButtonsBox,
+  WorkExperienceAddButton,
+} from "./WorkExperience.styled";
+import { AddWorkExperience } from "./AddWorkExperience/AddWorkExperience";
+import { EditWorkExperience } from "./EditWorkExperience/EditWorkExperience";
 
 export const WorkExperience = ({ userData, setUserData, change }) => {
   const [templateData, setTemplateData] = useState({
@@ -13,6 +26,14 @@ export const WorkExperience = ({ userData, setUserData, change }) => {
     },
   });
   const [editWorkExperience, setEditWorkExperience] = useState(null);
+
+  useEffect(() => {
+    const data = JSON.parse(JSON.stringify(userData.workExperience));
+    change ? setEditWorkExperience(data) : setEditWorkExperience(null);
+    !change &&
+      editWorkExperience !== null &&
+      setUserData({ ...userData, workExperience: editWorkExperience });
+  }, [change, userData.workExperience]);
 
   function reset() {
     setTemplateData({
@@ -28,129 +49,164 @@ export const WorkExperience = ({ userData, setUserData, change }) => {
   }
 
   return (
-    <section>
-      <h2>Work Experince</h2>
+    <WorkExperienceContainer>
+      <WorkExperienceTitle>Work Experince</WorkExperienceTitle>
       {editWorkExperience && (
-        <div>
-          <button
-            onClick={() => {
-              const findIndex = userData.workExperience.findIndex(
-                (index) => index.id === editWorkExperience.id
-              );
-              const updateWorkExperience = [...userData.workExperience];
-              updateWorkExperience[findIndex] = editWorkExperience;
-              setUserData({
-                ...userData,
-                workExperience: updateWorkExperience,
-              });
-              setEditWorkExperience(false);
-            }}
-          >
-            ok
-          </button>
-          <button
-            onClick={() => {
-              setEditWorkExperience(null);
-            }}
-          >
-            cancel
-          </button>
-          <ul style={{ display: "flex", flexDirection: "column-reverse" }}>
-            {Object.keys(editWorkExperience).map((item) => {
-              if (item === "id") {
-                return;
-              } else if (item === "responsibilities") {
-                return (
-                  <li key={`editWorkExpirience-${item}`}>
-                    <span>Responsibilities</span>
-                    <ul>
-                      {editWorkExperience.responsibilities.map((item) => {
-                        const objIndex =
-                          editWorkExperience.responsibilities.findIndex(
-                            (index) => index.id === item.id
-                          );
+        // <div>
+        //   <button
+        //     onClick={() => {
+        //       const findIndex = userData.workExperience.findIndex(
+        //         (index) => index.id === editWorkExperience.id
+        //       );
+        //       const updateWorkExperience = [...userData.workExperience];
+        //       updateWorkExperience[findIndex] = editWorkExperience;
+        //       setUserData({
+        //         ...userData,
+        //         workExperience: updateWorkExperience,
+        //       });
+        //       setEditWorkExperience(false);
+        //     }}
+        //   >
+        //     ok
+        //   </button>
+        //   <button
+        //     onClick={() => {
+        //       setEditWorkExperience(null);
+        //     }}
+        //   >
+        //     cancel
+        //   </button>
+        //   <ul style={{ display: "flex", flexDirection: "column-reverse" }}>
+        //     {Object.keys(editWorkExperience).map((item) => {
+        //       if (item === "id") {
+        //         return;
+        //       } else if (item === "responsibilities") {
+        //         return (
+        //           <li key={`editWorkExpirience-${item}`}>
+        //             <span>Responsibilities</span>
+        //             <ul>
+        //               {editWorkExperience.responsibilities.map((item) => {
+        //                 const objIndex =
+        //                   editWorkExperience.responsibilities.findIndex(
+        //                     (index) => index.id === item.id
+        //                   );
 
-                        return (
-                          <li key={item.id}>
-                            <input
-                              type="text"
-                              name={item.id}
-                              value={
-                                editWorkExperience.responsibilities[objIndex]
-                                  .value
-                              }
-                              onChange={(e) => {
-                                const newData = [
-                                  ...editWorkExperience.responsibilities,
-                                ];
-                                newData[objIndex].value = e.target.value;
-                                setEditWorkExperience({
-                                  ...editWorkExperience,
-                                  responsibilities: newData,
-                                });
-                              }}
-                            />
-                            <button
-                              onClick={() => {
-                                console.log(editWorkExperience);
-                                setEditWorkExperience({
-                                  ...editWorkExperience,
-                                  responsibilities: [
-                                    ...editWorkExperience.responsibilities,
-                                    { id: nanoid(), value: "" },
-                                  ],
-                                });
-                              }}
-                            >
-                              +
-                            </button>
-                            <button
-                              onClick={() => {
-                                const newArray =
-                                  editWorkExperience.responsibilities.filter(
-                                    (_, index) => index !== objIndex
-                                  );
-                                setEditWorkExperience({
-                                  ...editWorkExperience,
-                                  responsibilities: newArray,
-                                });
-                              }}
-                            >
-                              x
-                            </button>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </li>
-                );
-              } else {
-                return (
-                  <li key={`editWorkExpirience-${item}`}>
-                    <span>{item}</span>
-                    {" - "}
-                    <input
-                      type="text"
-                      value={editWorkExperience[item]}
-                      onChange={(e) => {
-                        setEditWorkExperience({
-                          ...editWorkExperience,
-                          [item]: e.target.value,
-                        });
-                      }}
-                    />
-                  </li>
-                );
-              }
-            })}
-          </ul>
-        </div>
+        //                 return (
+        //                   <li key={item.id}>
+        //                     <input
+        //                       type="text"
+        //                       name={item.id}
+        //                       value={
+        //                         editWorkExperience.responsibilities[objIndex]
+        //                           .value
+        //                       }
+        //                       onChange={(e) => {
+        //                         const newData = [
+        //                           ...editWorkExperience.responsibilities,
+        //                         ];
+        //                         newData[objIndex].value = e.target.value;
+        //                         setEditWorkExperience({
+        //                           ...editWorkExperience,
+        //                           responsibilities: newData,
+        //                         });
+        //                       }}
+        //                     />
+        //                     <button
+        //                       onClick={() => {
+        //                         console.log(editWorkExperience);
+        //                         setEditWorkExperience({
+        //                           ...editWorkExperience,
+        //                           responsibilities: [
+        //                             ...editWorkExperience.responsibilities,
+        //                             { id: nanoid(), value: "" },
+        //                           ],
+        //                         });
+        //                       }}
+        //                     >
+        //                       +
+        //                     </button>
+        //                     <button
+        //                       onClick={() => {
+        //                         const newArray =
+        //                           editWorkExperience.responsibilities.filter(
+        //                             (_, index) => index !== objIndex
+        //                           );
+        //                         setEditWorkExperience({
+        //                           ...editWorkExperience,
+        //                           responsibilities: newArray,
+        //                         });
+        //                       }}
+        //                     >
+        //                       x
+        //                     </button>
+        //                   </li>
+        //                 );
+        //               })}
+        //             </ul>
+        //           </li>
+        //         );
+        //       } else {
+        //         return (
+        //           <li key={`editWorkExpirience-${item}`}>
+        //             <span>{item}</span>
+        //             {" - "}
+        //             <input
+        //               type="text"
+        //               value={editWorkExperience[item]}
+        //               onChange={(e) => {
+        //                 setEditWorkExperience({
+        //                   ...editWorkExperience,
+        //                   [item]: e.target.value,
+        //                 });
+        //               }}
+        //             />
+        //           </li>
+        //         );
+        //       }
+        //     })}
+        //   </ul>
+        // </div>
+        <EditWorkExperience
+          userData={userData}
+          setUserData={setUserData}
+          editWorkExperience={editWorkExperience}
+          setEditWorkExperience={setEditWorkExperience}
+        />
       )}
-      {userData.workExperience.length > 0 && (
-        <ul>
+      {userData.workExperience.length > 0 && !change && (
+        <WorkExperienceList>
           {userData.workExperience.map((item) => {
             return (
               <li key={item.id}>
+                <div style={{ marginBottom: 4 }}>
+                  <WorkExperiencePosition>
+                    {item.company}
+                  </WorkExperiencePosition>
+                  {" | "}
+                  <WorkExperiencePosition $variant="true">
+                    {item.position}
+                  </WorkExperiencePosition>
+                </div>
+                <div style={{ marginBottom: 4 }}>
+                  <WorkExperienceYear>{item.startYear}</WorkExperienceYear>
+                  <WorkExperienceYear>
+                    {" - "}
+                    {item.endYear}
+                  </WorkExperienceYear>
+                </div>
+                {item.responsibilities.length > 0 && (
+                  <WorkExperienceREsponsibilitiesList>
+                    {item.responsibilities.map((item) => {
+                      return (
+                        <li key={item.id}>
+                          <WorkExperienceResponsibilitiesText>
+                            {item.value}
+                          </WorkExperienceResponsibilitiesText>
+                        </li>
+                      );
+                    })}
+                  </WorkExperienceREsponsibilitiesList>
+                )}
                 {change && (
                   <div>
                     <button
@@ -177,141 +233,19 @@ export const WorkExperience = ({ userData, setUserData, change }) => {
                     </button>
                   </div>
                 )}
-
-                <br />
-                <strong>{item.company}</strong>
-                <span>|{item.position}</span>
-                <br />
-                <span>{item.startYear}</span>
-                <span>-{item.endYear}</span>
-                {item.responsibilities.length > 0 && (
-                  <ul>
-                    {item.responsibilities.map((item) => {
-                      return (
-                        <li key={item.id}>
-                          <p>{item.value}</p>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
               </li>
             );
           })}
-        </ul>
+        </WorkExperienceList>
       )}
-      {change && (
-        <div>
-          <button
-            onClick={() => {
-              setTemplateData({ ...templateData, state: !templateData.state });
-            }}
-          >
-            add
-          </button>
-          {templateData.data.company !== "" &&
-            templateData.data.position !== "" &&
-            templateData.data.startYear !== "" &&
-            templateData.data.endYear !== "" && (
-              <button
-                onClick={() => {
-                  setUserData({
-                    ...userData,
-                    workExperience: [
-                      ...userData.workExperience,
-                      { ...templateData.data, id: nanoid() },
-                    ],
-                  });
-                  reset();
-                }}
-              >
-                confirm
-              </button>
-            )}
-        </div>
-      )}
-      {templateData.state && (
-        <ul>
-          {Object.keys(templateData.data).map((item) => {
-            if (item !== "responsibilities") {
-              return (
-                <li key={`add-workExperience${item}`}>
-                  <span>{item}</span>
-                  <input
-                    type="text"
-                    name={item}
-                    placeholder={item}
-                    value={templateData.data[item]}
-                    onChange={(e) => {
-                      setTemplateData({
-                        ...templateData,
-                        data: { ...templateData.data, [item]: e.target.value },
-                      });
-                    }}
-                  />
-                </li>
-              );
-            } else {
-              return (
-                <li key={`add-workExperience${item}`}>
-                  <span>{item}:</span>
-                  <br />
-                  <ul>
-                    {templateData.data.responsibilities.map((item) => {
-                      const findIndex =
-                        templateData.data.responsibilities.findIndex(
-                          (obj) => obj.id === item.id
-                        );
-                      return (
-                        <li key={`work-resposibilities${item.id}`}>
-                          <input
-                            type="text"
-                            name={item}
-                            value={
-                              templateData.data.responsibilities[findIndex]
-                                .value
-                            }
-                            onChange={(e) => {
-                              const updatedResponsibilities = [
-                                ...templateData.data.responsibilities,
-                              ];
-                              updatedResponsibilities[findIndex].value =
-                                e.target.value;
-                              setTemplateData({
-                                ...templateData,
-                                data: {
-                                  ...templateData.data,
-                                  responsibilities: updatedResponsibilities,
-                                },
-                              });
-                            }}
-                          />
-                        </li>
-                      );
-                    })}
-                  </ul>
-                  <button
-                    onClick={() => {
-                      setTemplateData({
-                        ...templateData,
-                        data: {
-                          ...templateData.data,
-                          responsibilities: [
-                            ...templateData.data.responsibilities,
-                            { id: nanoid(), value: "dsadsa" },
-                          ],
-                        },
-                      });
-                    }}
-                  >
-                    +
-                  </button>
-                </li>
-              );
-            }
-          })}
-        </ul>
-      )}
-    </section>
+
+      <AddWorkExperience
+        setUserData={setUserData}
+        userData={userData}
+        change={change}
+        editWorkExperience={editWorkExperience}
+        setEditWorkExperience={setEditWorkExperience}
+      />
+    </WorkExperienceContainer>
   );
 };

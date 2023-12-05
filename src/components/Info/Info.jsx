@@ -1,17 +1,19 @@
+import { InfoContainer, InfoEditInput, InfoText } from "./Info.styled";
+import { useState } from "react";
+
 export const Info = ({ userData, change, setUserData }) => {
   return (
-    <div>
+    <InfoContainer>
       {change ? (
-        <textarea
-          style={{ width: "100%", height: 80 }}
+        <InfoEditInput
           value={userData.info}
           onChange={(e) => {
             setUserData({ ...userData, info: e.target.value });
           }}
-        ></textarea>
+        ></InfoEditInput>
       ) : (
-        <p>{userData.info}</p>
+        <InfoText>{userData.info}</InfoText>
       )}
-    </div>
+    </InfoContainer>
   );
 };

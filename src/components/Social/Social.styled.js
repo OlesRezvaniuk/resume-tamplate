@@ -11,33 +11,35 @@ export const SocialsContainer = styled.div`
 `;
 
 export const FacebookIcon = styled(FacebookIconPrimal)`
-  width: 32px;
-  height: 32px;
+  width: inherit;
+  height: inherit;
   fill: #425168;
 `;
 export const LinkedinIcon = styled(LinkedinIconPrimal)`
-  width: 32px;
-  height: 32px;
+  width: inherit;
+  height: inherit;
   fill: #425168;
 `;
 export const GithubIcon = styled(GithubIconPrimal)`
-  width: 32px;
-  height: 32px;
+  width: inherit;
+  height: inherit;
   fill: #425168;
 `;
 export const TelegramIcon = styled(TelegramIconPrimal)`
-  width: 32px;
-  height: 32px;
+  width: inherit;
+  height: inherit;
   fill: #425168;
 `;
 
 export const SocialInputsListItem = styled.li`
   padding: 0px 0px 0px 10px;
+  height: 20px;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
   box-shadow: 0px 0px 0px 1px lightgrey;
   border-radius: 2px;
+  align-items: center;
   transition: 250ms;
   &:hover,
   &:focus {
@@ -48,6 +50,7 @@ export const SocialInputsListItem = styled.li`
 export const SocialLinkInput = styled.input`
   cursor: pointer;
   width: 100%;
+  background: none;
 `;
 
 export const SocialInputsList = styled.ul`
@@ -58,7 +61,7 @@ export const SocialInputsList = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 `;
 
 export const SocialInputItemName = styled.span`

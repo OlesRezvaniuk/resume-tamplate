@@ -14,6 +14,7 @@ import {
   CheckmarkIcon,
   CrossIcon,
   SoftSkillsTitle,
+  SoftSkillsAddInput,
 } from "./SoftSkills.styled";
 
 export const SoftSkills = ({ userData, setUserData, change }) => {
@@ -48,7 +49,14 @@ export const SoftSkills = ({ userData, setUserData, change }) => {
                     setUserData({ ...userData, socialSkills: editData });
                   }}
                 />
-                <SoftSkillsItemEditButton>
+                <SoftSkillsItemEditButton
+                  onClick={() => {
+                    const updateData = userData.softSkills.filter(
+                      (i) => i.id !== item.id
+                    );
+                    setUserData({ ...userData, softSkills: updateData });
+                  }}
+                >
                   <DeleteIcon />
                 </SoftSkillsItemEditButton>
               </SoftSkillsListItem>
@@ -56,7 +64,7 @@ export const SoftSkills = ({ userData, setUserData, change }) => {
           })}
         </SoftSkillsList>
       ) : (
-        <ul>
+        <ul style={{ display: "flex", flexDirection: "column", gap: 4 }}>
           {userData.softSkills.map((item) => {
             return (
               <li
@@ -66,7 +74,7 @@ export const SoftSkills = ({ userData, setUserData, change }) => {
                 }}
                 key={item.id}
               >
-                <p>{item.value}</p>
+                <p style={{ pointerEvents: "none" }}>{item.value}</p>
                 {change && (
                   <SoftSkillsAddButtonBox>
                     <SoftSkillsAddButtonVariant
@@ -100,7 +108,7 @@ export const SoftSkills = ({ userData, setUserData, change }) => {
 
       {templateData.state && (
         <SoftSkillAddInputBox>
-          <input
+          <SoftSkillsAddInput
             type="text"
             name="addSoftSkillsInput"
             id="techSkillsAddInput"

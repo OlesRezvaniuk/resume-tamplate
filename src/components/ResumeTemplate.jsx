@@ -16,6 +16,8 @@ import { Social } from "./Social/Social";
 import { TechSkills } from "./TechSkills/TechSkills";
 import { SoftSkills } from "./SoftSkills/SoftSkills";
 import { Languages } from "./Languages/Languages";
+import { Main } from "./Main/Main";
+import { Aside } from "./Aside/Aside";
 
 function ResumeTemplate() {
   const { auth } = useSelector(authSelector);
@@ -33,7 +35,6 @@ function ResumeTemplate() {
       tel: "",
       email: "",
       city: "",
-      country: "",
     },
     social: {
       facebook: "",
@@ -74,7 +75,7 @@ function ResumeTemplate() {
   }
 
   return (
-    <>
+    <div style={{ maxWidth: 1200, margin: 30 }}>
       <div>
         <button
           onClick={() => {
@@ -108,75 +109,15 @@ function ResumeTemplate() {
           display: "flex",
         }}
       >
-        <aside
-          style={{
-            maxWidth: 370,
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            gap: 40,
-          }}
-        >
-          <Avatar
-            userData={userData}
-            setUserData={setUserData}
-            change={change}
-          />
-          <Contacts
-            userData={userData}
-            setUserData={setUserData}
-            change={change}
-          />
-          <Social
-            userData={userData}
-            setUserData={setUserData}
-            change={change}
-          />
-          <TechSkills
-            userData={userData}
-            setUserData={setUserData}
-            change={change}
-          />
-          <SoftSkills
-            userData={userData}
-            setUserData={setUserData}
-            change={change}
-          />
-          <Languages
-            userData={userData}
-            setUserData={setUserData}
-            change={change}
-          />
-        </aside>
-        <div
-          style={{ display: "flex", flexDirection: "column", width: "100%" }}
-        >
-          <Specialty
-            usersData={userData}
-            change={change}
-            setUserData={setUserData}
-            setChange={setChange}
-          />
-          <Name userData={userData} change={change} setUserData={setUserData} />
-          <Info userData={userData} change={change} setUserData={setUserData} />
-          <Projects
-            userData={userData}
-            change={change}
-            setUserData={setUserData}
-          />
-          <WorkExperience
-            userData={userData}
-            setUserData={setUserData}
-            change={change}
-          />
-          <Education
-            userData={userData}
-            setUserData={setUserData}
-            change={change}
-          />
-        </div>
+        <Aside userData={userData} change={change} setUserData={setUserData} />
+        <Main
+          userData={userData}
+          change={change}
+          setUserData={setUserData}
+          setChange={setChange}
+        />
       </div>
-    </>
+    </div>
   );
 }
 

@@ -18,14 +18,14 @@ export const TechSkillsTitle = styled.h2`
 
 export const TechSkillsAddButton = styled.button`
   margin-left: auto;
-  width: 85px;
-  height: 19.5px;
+  width: 20px;
+  height: 20px;
   background: #425168;
   color: #fff;
   transition: 250ms;
   cursor: pointer;
   position: absolute;
-  bottom: -23px;
+  bottom: -24px;
   right: 30px;
   &:hover,
   &:focus {
@@ -40,7 +40,7 @@ export const TechSkillsAddButtonBox = styled.div`
   right: 0;
   background: #425168;
   border-radius: 3px;
-  width: 85px;
+  width: 40px;
   height: 100%;
   align-items: center;
   display: flex;
@@ -59,13 +59,13 @@ export const CrossIcon = styled(CrossIconPrimal)`
   margin-bottom: 1px;
 `;
 export const DeleteIcon = styled(DeleteIconPrimal)`
-  height: 12px;
+  height: 14px;
   fill: inherit;
   pointer-events: none;
   margin-bottom: 1px;
 `;
 export const PencilIcon = styled(PencilIconPrimal)`
-  height: 12px;
+  height: 14px;
   fill: inherit;
   pointer-events: none;
   margin-bottom: 1px;
@@ -80,14 +80,14 @@ export const TechSkillAddInputBox = styled.div`
   box-shadow: 0px 0px 0px 1px lightgrey;
   border-radius: 2px;
   transition: 250ms;
-  height: 19px;
+  height: 20px;
 `;
 
 export const TechSkillsAddButtonVariant = styled.button`
   background: none;
-  width: 100%;
+  width: 20px;
   background: #425168;
-  height: 100%;
+  height: 20px;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -105,7 +105,7 @@ export const TechSkillsAddButtonVariant = styled.button`
 export const TechSkillsList = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
   list-style: none;
 `;
 
@@ -126,15 +126,15 @@ export const TechSkillsItemEditBox = styled.div`
   margin-left: auto;
   width: 64px;
   display: flex;
-  height: 19.5px;
+  height: 20px;
   border-radius: 3px;
 `;
 
 export const TechSkillsItemEditButton = styled.button`
-  min-width: 85px;
+  width: 20px;
   fill: #fff;
   background: #425168;
-  height: 19.5px;
+  height: 20px;
   justify-content: center;
   display: flex;
   align-items: center;

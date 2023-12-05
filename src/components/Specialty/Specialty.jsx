@@ -1,11 +1,17 @@
+import {
+  SpecialtyContainer,
+  SpecialtyTitle,
+  SpecialtyEditInput,
+} from "./Specialty.styled";
+
 export const Specialty = ({ usersData, change, setUserData, setChange }) => {
   function handleSpecialtyChange(e) {
     setUserData({ ...usersData, specialty: e.target.value });
   }
   return (
-    <>
+    <SpecialtyContainer>
       {change ? (
-        <input
+        <SpecialtyEditInput
           type="text"
           value={usersData.specialty}
           onChange={(e) => {
@@ -13,8 +19,8 @@ export const Specialty = ({ usersData, change, setUserData, setChange }) => {
           }}
         />
       ) : (
-        <span>{usersData.specialty}</span>
+        <SpecialtyTitle>{usersData.specialty}</SpecialtyTitle>
       )}
-    </>
+    </SpecialtyContainer>
   );
 };

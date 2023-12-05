@@ -5,9 +5,12 @@ import {
   ContactsList,
   ContactsInputsList,
   ContactsInputsListItem,
-  ContactInputItemName,
+  ContactInputType,
   ContactsInput,
   ContactLink,
+  LocationIcon,
+  TelIcon,
+  EmailIcon,
 } from "./Contacts.styled";
 
 export const Contacts = ({ userData, setUserData, change }) => {
@@ -29,7 +32,7 @@ export const Contacts = ({ userData, setUserData, change }) => {
           {Object.keys(userData.contacts).map((item) => {
             if (item === "tel" || item === "email") {
               return (
-                <li key={`contacts-${item}`}>
+                <li key={`contacts-${item}`} style={{ height: 20 }}>
                   {userData.contacts[item] !== "" ? (
                     <ContactLink
                       href={
@@ -67,8 +70,11 @@ export const Contacts = ({ userData, setUserData, change }) => {
             {Object.keys(editData).map((item) => {
               return (
                 <ContactsInputsListItem key={`editContacts-${item}`}>
-                  <ContactInputItemName>{item}</ContactInputItemName>
-
+                  <ContactInputType>
+                    {item === "city" && <LocationIcon />}
+                    {item === "tel" && <TelIcon />}
+                    {item === "email" && <EmailIcon />}
+                  </ContactInputType>
                   <ContactsInput
                     type="text"
                     name={item}

@@ -12,6 +12,13 @@ import {
   LanguagesEditLevelList,
   LanguagesEditLevelItemButton,
   LanguagesEditSetLevelButton,
+  LanguagesAddBox,
+  CheckmarkIcon,
+  CrossIcon,
+  LanguagesAddButtonBox,
+  LanguagesAddButtonVariant,
+  LanguagesAddInput,
+  LanguagesAddSetLevelButton,
 } from "./Languages.styled";
 
 const languagesLevel = [
@@ -22,7 +29,6 @@ const languagesLevel = [
   "Upper-Intermediate",
   "Advanced",
   "Proficiency",
-  "Native",
 ];
 
 export const Languages = ({ userData, setUserData, change }) => {
@@ -60,10 +66,17 @@ export const Languages = ({ userData, setUserData, change }) => {
       <LanguagesTitle>Languages</LanguagesTitle>
 
       {userData.languages.length > 0 && !change && (
-        <ul style={{ listStyle: "none" }}>
+        <ul
+          style={{
+            listStyle: "none",
+            display: "flex",
+            flexDirection: "column",
+            gap: 4,
+          }}
+        >
           {userData.languages.map((item) => {
             return (
-              <li key={item.id}>
+              <li style={{ pointerEvents: "none" }} key={item.id}>
                 <span>{item.value}</span>
                 {item.level !== "" && " - "}
                 <span>{item.level}</span>
@@ -99,6 +112,7 @@ export const Languages = ({ userData, setUserData, change }) => {
                         (i) => i.setLevel !== item.setLevel
                       );
                       if (some) {
+                        console.log(some);
                         return;
                       } else {
                         updateData[index].setLevel = true;
@@ -146,32 +160,6 @@ export const Languages = ({ userData, setUserData, change }) => {
           </LanguagesEditInputList>
         </div>
       )}
-      {/* {userData.languages.length > 0 && (
-        <div>
-          <ul>
-            {userData.languages.map((item) => {
-              return (
-                <li key={item.id}>
-                  <span>{item.value}</span>
-                  {" - "}
-                  <span>{item.level}</span>
-                  {change && (
-                    <div>
-                      <button
-                        onClick={() => {
-                          setEditData(item);
-                        }}
-                      >
-                        edit
-                      </button>
-                    </div>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )} */}
       {change && (
         <LanguagesAddButton
           onClick={() => {
@@ -182,25 +170,23 @@ export const Languages = ({ userData, setUserData, change }) => {
         </LanguagesAddButton>
       )}
       {templateData.state && (
-        <div>
-          <div style={{ display: "flex" }}>
-            <input
-              type="text"
-              name="addLanguagesInput"
-              value={templateData.value}
-              onChange={(e) => {
-                setTemplateData({ ...templateData, value: e.target.value });
-              }}
-            />
-            <div
-              style={{ background: "lightgrey", height: 20, width: "100%" }}
-              onClick={() => {
-                setTemplateData({ ...templateData, setLevel: true });
-              }}
-            >
-              {templateData.level}
-            </div>
-          </div>
+        <LanguagesAddBox>
+          <LanguagesAddInput
+            type="text"
+            name="addLanguagesInput"
+            value={templateData.value}
+            onChange={(e) => {
+              setTemplateData({ ...templateData, value: e.target.value });
+            }}
+          />
+          <LanguagesAddSetLevelButton
+            onClick={() => {
+              setTemplateData({ ...templateData, setLevel: true });
+            }}
+          >
+            {templateData.level}
+          </LanguagesAddSetLevelButton>
+
           {templateData.setLevel && (
             <ul>
               {languagesLevel.map((item) => {
@@ -222,42 +208,45 @@ export const Languages = ({ userData, setUserData, change }) => {
               })}
             </ul>
           )}
-          <button
-            onClick={() => {
-              setUserData({
-                ...userData,
-                languages: [
-                  ...userData.languages,
-                  {
-                    id: nanoid(),
-                    value: templateData.value,
-                    level: templateData.level,
-                  },
-                ],
-              });
-              setTemplateData({
-                state: false,
-                value: "",
-                level: "",
-                setLevel: false,
-              });
-            }}
-          >
-            confirm
-          </button>
-          <button
-            onClick={() => {
-              setTemplateData({
-                state: false,
-                value: "",
-                level: "",
-                setLevel: false,
-              });
-            }}
-          >
-            cancel
-          </button>
-        </div>
+          <LanguagesAddButtonBox>
+            <LanguagesAddButtonVariant
+              onClick={() => {
+                setUserData({
+                  ...userData,
+                  languages: [
+                    ...userData.languages,
+                    {
+                      id: nanoid(),
+                      value: templateData.value,
+                      level: templateData.level,
+                      setLevel: false,
+                    },
+                  ],
+                });
+                setTemplateData({
+                  state: false,
+                  value: "",
+                  level: "",
+                  setLevel: false,
+                });
+              }}
+            >
+              <CheckmarkIcon />
+            </LanguagesAddButtonVariant>
+            <LanguagesAddButtonVariant
+              onClick={() => {
+                setTemplateData({
+                  state: false,
+                  value: "",
+                  level: "",
+                  setLevel: false,
+                });
+              }}
+            >
+              <CrossIcon />
+            </LanguagesAddButtonVariant>
+          </LanguagesAddButtonBox>
+        </LanguagesAddBox>
       )}
     </LanguagesContainer>
   );

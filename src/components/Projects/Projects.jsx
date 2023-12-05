@@ -1,5 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
+import {
+  ProjectsTitle,
+  ProjectsText,
+  ProjectLink,
+  ProjectText,
+  ProjectsList,
+  ProjectItem,
+} from "./Project.styled";
+import { EditProjects } from "./EditProjects/EditProjects";
+import { AddProject } from "./AddProject/AddProject";
 
 export const Projects = ({ userData, setUserData, change }) => {
   const [templateData, setTemplateData] = useState({
@@ -13,6 +23,12 @@ export const Projects = ({ userData, setUserData, change }) => {
     },
   });
   const [editProject, setEditProject] = useState(null);
+  const [editData, setEditData] = useState(null);
+
+  useEffect(() => {
+    change ? setEditData(userData.projects) : setEditData(null);
+    userData.projects && setEditData(userData.projects);
+  }, [change, userData.projects]);
 
   function reset() {
     setTemplateData({
@@ -28,183 +44,53 @@ export const Projects = ({ userData, setUserData, change }) => {
   }
 
   return (
-    <div>
-      <h2>Projects</h2>
-      {editProject && (
-        <div>
-          <ul>
-            {Object.keys(editProject).map((item) => {
-              if (item === "id") {
-                return;
-              } else {
-                return (
-                  <li key={`editProject-${item}`}>
-                    <span>{item}</span>
-                    {" - "}
-                    <input
-                      type="text"
-                      name={item}
-                      value={editProject[item]}
-                      onChange={(e) => {
-                        setEditProject({
-                          ...editProject,
-                          [item]: e.target.value,
-                        });
-                      }}
-                    />
-                  </li>
-                );
-              }
-            })}
-          </ul>
-          <button
-            onClick={() => {
-              const updateData = userData.projects;
-              console.log(updateData);
-              const findIndex = updateData.findIndex(
-                (index) => index.id === editProject.id
-              );
-              updateData[findIndex] = editProject;
-              setUserData({ ...userData, projects: updateData });
-              setEditProject(null);
-            }}
-          >
-            confirm
-          </button>
-          <button
-            onClick={() => {
-              setEditProject(null);
-            }}
-          >
-            cancel
-          </button>
-        </div>
+    <div
+      style={{
+        maxWidth: 710,
+        overflowWrap: "break-word",
+        position: "relative",
+        marginBottom: 35,
+      }}
+    >
+      <ProjectsTitle>Projects</ProjectsTitle>
+      {change && editData && (
+        <EditProjects
+          editData={editData}
+          setEditData={setEditData}
+          userData={userData}
+          setUserData={setUserData}
+        />
       )}
-      {userData.projects.length > 0 && (
-        <ul>
+      {userData.projects.length > 0 && !change && (
+        <ProjectsList>
           {userData.projects.map((item) => {
             return (
-              <li key={item.id}>
-                <div>
-                  <a href={item.gitLink} target="_blank">
-                    {item.name}
-                  </a>
-                  {" - "}
-                  <a href={item.lifeLink} target="_blank">
-                    Link
-                  </a>
-                  <span>{` [ ${item.technology} ]`}</span>
-                  <p>{item.info}</p>
-                </div>
-                {change && (
-                  <div>
-                    <button
-                      onClick={() => {
-                        const updateData = userData.projects.filter(
-                          (obj) => obj.id !== item.id
-                        );
-                        setUserData({ ...userData, projects: updateData });
-                      }}
-                    >
-                      delete
-                    </button>
-                    <button
-                      onClick={() => {
-                        setEditProject(item);
-                      }}
-                    >
-                      edit
-                    </button>
-                  </div>
-                )}
-              </li>
+              <ProjectItem
+                key={item.id}
+                style={{
+                  height: 100,
+                }}
+              >
+                <ProjectLink target="_blank" href={item.gitLink}>
+                  {item.name}
+                </ProjectLink>
+                {" - "}
+                <ProjectLink target="_blank" href={item.gitLink}>
+                  Link
+                </ProjectLink>
+                {" - "}
+                {`[  ${item.technology}  ]`}
+                <ProjectText>{item.info}</ProjectText>
+              </ProjectItem>
             );
           })}
-        </ul>
+        </ProjectsList>
       )}
-      {change && (
-        <button
-          onClick={() => {
-            setTemplateData({ ...templateData, state: !templateData.state });
-          }}
-        >
-          add project
-        </button>
-      )}
-      {templateData.state && (
-        <div>
-          <ul>
-            {Object.keys(templateData.data).map((item) => {
-              if (item === "info") {
-                return (
-                  <li key={`addProject-${item}`}>
-                    <textarea
-                      name=""
-                      id=""
-                      cols="30"
-                      rows="10"
-                      value={templateData.data[item]}
-                      onChange={(e) => {
-                        setTemplateData({
-                          ...templateData,
-                          data: {
-                            ...templateData.data,
-                            [item]: e.target.value,
-                          },
-                        });
-                      }}
-                    />
-                  </li>
-                );
-              } else {
-                return (
-                  <li key={`addProject-${item}`}>
-                    <span>
-                      {item}
-                      {" - "}
-                    </span>
-                    <input
-                      type="text"
-                      name={item}
-                      value={templateData.data[item]}
-                      onChange={(e) => {
-                        setTemplateData({
-                          ...templateData,
-                          data: {
-                            ...templateData.data,
-                            [item]: e.target.value,
-                          },
-                        });
-                      }}
-                    />
-                  </li>
-                );
-              }
-            })}
-          </ul>
-          <button
-            onClick={() => {
-              setUserData({
-                ...userData,
-                projects: [
-                  ...userData.projects,
-                  { id: nanoid(), ...templateData.data },
-                ],
-              });
-              reset();
-            }}
-          >
-            confirm
-          </button>
-          <button
-            onClick={() => {
-              reset();
-            }}
-          >
-            cancel
-          </button>
-        </div>
-      )}
+      <AddProject
+        change={change}
+        userData={userData}
+        setUserData={setUserData}
+      />
     </div>
   );
 };

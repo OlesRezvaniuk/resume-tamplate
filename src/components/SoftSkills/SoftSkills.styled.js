@@ -5,15 +5,15 @@ import { ReactComponent as CheckmarkIconPrimal } from "./icon/checkmark.svg";
 
 export const SoftSkillsAddButton = styled.button`
   margin-left: auto;
-  width: 85px;
-  height: 19.5px;
+  width: 20px;
+  height: 20px;
   background: #425168;
   color: #fff;
   transition: 250ms;
   cursor: pointer;
   margin-top: 8px;
   position: absolute;
-  bottom: -23px;
+  bottom: -24px;
   right: 30px;
   &:hover,
   &:focus {
@@ -28,6 +28,7 @@ export const SoftSkillsTitle = styled.h2`
   font-style: normal;
   font-weight: 700;
   margin-bottom: 8px;
+  pointer-events: none;
 `;
 
 export const SoftSkillsContainer = styled.div`
@@ -38,20 +39,20 @@ export const SoftSkillsContainer = styled.div`
 `;
 
 export const DeleteIcon = styled(DeleteIconPrimal)`
-  height: 12px;
+  height: 14px;
   fill: inherit;
   pointer-events: none;
   margin-bottom: 1px;
 `;
 
 export const CheckmarkIcon = styled(CheckmarkIconPrimal)`
-  height: 16px;
+  height: 14px;
   fill: inherit;
   pointer-events: none;
   margin-bottom: 1px;
 `;
 export const CrossIcon = styled(CrossIconPrimal)`
-  height: 14px;
+  height: 12px;
   fill: inherit;
   pointer-events: none;
   margin-bottom: 1px;
@@ -60,7 +61,7 @@ export const CrossIcon = styled(CrossIconPrimal)`
 export const SoftSkillsList = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
   list-style: none;
 `;
 
@@ -84,10 +85,10 @@ export const SoftSkillsInput = styled.input`
 `;
 
 export const SoftSkillsItemEditButton = styled.button`
-  min-width: 85px;
+  width: 20px;
   fill: #fff;
   background: #425168;
-  height: 19.5px;
+  height: 20px;
   justify-content: center;
   display: flex;
   align-items: center;
@@ -106,7 +107,7 @@ export const SoftSkillsAddButtonBox = styled.div`
   right: 0;
   background: #425168;
   border-radius: 3px;
-  width: 85px;
+  width: 40px;
   height: 100%;
   align-items: center;
   display: flex;
@@ -114,9 +115,9 @@ export const SoftSkillsAddButtonBox = styled.div`
 
 export const SoftSkillsAddButtonVariant = styled.button`
   background: none;
-  width: 100%;
+  width: 20px;
   background: #425168;
-  height: 100%;
+  height: 20px;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -132,7 +133,7 @@ export const SoftSkillsAddButtonVariant = styled.button`
 `;
 
 export const SoftSkillAddInputBox = styled.div`
-  margin-top: 3px;
+  margin-top: 4px;
   position: relative;
   padding: 0px 0px 0px 10px;
   display: flex;
@@ -140,5 +141,15 @@ export const SoftSkillAddInputBox = styled.div`
   box-shadow: 0px 0px 0px 1px lightgrey;
   border-radius: 2px;
   transition: 250ms;
-  height: 19px;
+  height: 20px;
+  &:hover,
+  &:focus {
+    box-shadow: 0px 0px 0px 1px grey;
+  }
+`;
+
+export const SoftSkillsAddInput = styled.input`
+  background: none;
+  cursor: pointer;
+  width: 100%;
 `;

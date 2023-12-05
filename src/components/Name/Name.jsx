@@ -1,8 +1,10 @@
+import { NameBox, NameTitle, NameEditInput } from "./Name.styled";
+
 export const Name = ({ userData, change, setUserData }) => {
   return (
-    <>
+    <NameBox>
       {change ? (
-        <input
+        <NameEditInput
           type="text"
           value={userData.name}
           onChange={(e) => {
@@ -10,8 +12,10 @@ export const Name = ({ userData, change, setUserData }) => {
           }}
         />
       ) : (
-        <h1>{userData.name === "" ? "User name" : userData.name}</h1>
+        <NameTitle>
+          {userData.name === "" ? "User name" : userData.name}
+        </NameTitle>
       )}
-    </>
+    </NameBox>
   );
 };
