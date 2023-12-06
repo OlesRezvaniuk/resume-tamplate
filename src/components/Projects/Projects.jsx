@@ -74,7 +74,7 @@ export const Projects = ({ userData, setUserData, change }) => {
                   {item.name}
                 </ProjectLink>
                 {" - "}
-                <ProjectLink target="_blank" href={item.gitLink}>
+                <ProjectLink target="_blank" href={item.lifeLink}>
                   Link
                 </ProjectLink>
                 {" - "}
