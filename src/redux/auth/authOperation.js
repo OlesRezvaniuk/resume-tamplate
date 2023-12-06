@@ -25,3 +25,14 @@ export const singInGoogle = createAsyncThunk(
     }
   }
 );
+
+export const getAvatar = createAsyncThunk(
+  "auth/avatar",
+  ({ file }, rejectWithValue) => {
+    try {
+      return file;
+    } catch (error) {
+      console.log("catch");
+    }
+  }
+);

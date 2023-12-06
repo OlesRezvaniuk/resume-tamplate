@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import firebase from "../../firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { authSelector } from "../../redux/auth/authSelector";
 import { AvatarContainer, AvatarPlugBox, AvatarImg } from "./Avatar.styled";
+import { getAvatar } from "../../redux/auth/authOperation";
 
 export const Avatar = ({ userData, setUserData, change }) => {
   const [avatarFile, setAvatarFile] = useState(null);
   const { auth } = useSelector(authSelector);
+  const { avatar } = useSelector(authSelector);
+  const dispatch = useDispatch();
 
   async function uploadAvatar() {
     if (auth && avatarFile) {
@@ -27,14 +30,12 @@ export const Avatar = ({ userData, setUserData, change }) => {
     avatarFile && uploadAvatar();
   }, [avatarFile]);
 
-  return (
-    <AvatarContainer>
-      {userData.avatar ? (
-        <AvatarImg src={userData.avatar} alt="avatarPlugData" />
-      ) : (
-        <AvatarPlugBox />
-      )}
+  useEffect(() => {
+    dispatch(getAvatar({ file: userData.avatar }));
+  }, [userData.avatar]);
 
+  return (
+    <AvatarContainer $bgImage={avatar}>
       {change && (
         <input
           style={{

@@ -25,6 +25,7 @@ function ResumeTemplate() {
   const { auth } = useSelector(authSelector);
   const [change, setChange] = useState(true);
   const [restoreData, setRestoreData] = useState(null);
+  const [mobile, setMobile] = useState(false);
   const [userData, setUserData] = useState({
     specialty: "you'r specialty",
     name: "you'r name",
@@ -153,20 +154,24 @@ function ResumeTemplate() {
         setUserData,
         userData,
       });
+    auth && setChange(false);
   }, [auth]);
 
   function sendChanges() {
     firebaseRequests.postUserData({ userId: auth.uid, userData });
   }
 
-  // const saveHTMLasPDF = () => {
-  //   const element = document.getElementById("root"); // Замініть 'yourHTMLContent' на ідентифікатор вашого HTML вмісту
-  //   html2pdf(element);
-  // };
-
   return (
     <ResumeTemplateContainer>
       <div>
+        <button
+          style={{ marginRight: 50, background: "grey", color: "white" }}
+          onClick={() => {
+            setMobile(!mobile);
+          }}
+        >
+          {!mobile ? "MOBILE" : "PC"}
+        </button>
         <button
           onClick={() => {
             window.print();
@@ -185,8 +190,10 @@ function ResumeTemplate() {
         <button
           style={{ background: !change ? "#fff" : "green" }}
           onClick={() => {
-            setChange(!change);
-            change && sendChanges();
+            if (auth) {
+              setChange(!change);
+              change && sendChanges();
+            }
           }}
         >
           {!change ? "change data" : "confirm"}
@@ -203,9 +210,8 @@ function ResumeTemplate() {
       </div>
       <div
         style={{
-          display: "flex",
+          display: !mobile && "flex",
           justifyContent: "center",
-          boxShadow: "0px 0px 10px lightgrey",
         }}
       >
         <Aside userData={userData} change={change} setUserData={setUserData} />
