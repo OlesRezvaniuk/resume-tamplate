@@ -1,10 +1,16 @@
 {
   "files": {
     "main.css": "/resume-template/static/css/main.c2e131f9.css",
-    "main.js": "/resume-template/static/js/main.ad104345.js",
+    "main.js": "/resume-template/static/js/main.7d4fa27c.js",
+    "static/media/edit.svg": "/resume-template/static/media/edit.3d874d5ebd9734c17c67143aa9fd102a.svg",
+    "static/media/google.svg": "/resume-template/static/media/google.20efb4107872bad8f5147c2e1e9ebfa0.svg",
     "static/media/github.svg": "/resume-template/static/media/github.de0523924cec8524e47759c347a1e330.svg",
     "static/media/cross.svg": "/resume-template/static/media/cross.d5ab96da0d54fcdcdcde3e1f38b2c478.svg",
+    "static/media/reset.svg": "/resume-template/static/media/reset.8ba48d66c58a9df11780d5e71f32db15.svg",
+    "static/media/save.svg": "/resume-template/static/media/save.2af870f2d34622f9b10078a6c98c12be.svg",
     "index.html": "/resume-template/index.html",
+    "static/media/zoom-in.svg": "/resume-template/static/media/zoom-in.08cbede9ee7037b2bf5ec616cd365247.svg",
+    "static/media/zoom-out.svg": "/resume-template/static/media/zoom-out.3a86548182b926e8d84087ab657cf258.svg",
     "static/media/telegram.svg": "/resume-template/static/media/telegram.d27e5a670d926587f52b9f7a6009ef66.svg",
     "static/media/linkedin.svg": "/resume-template/static/media/linkedin.95ba3b56302d593e9cf1383947cdb4a7.svg",
     "static/media/envelop.svg": "/resume-template/static/media/envelop.2e57455414a9d883bfdbb07eca200f3a.svg",
@@ -13,12 +19,13 @@
     "static/media/facebook2.svg": "/resume-template/static/media/facebook2.7e12c4339b04a47f35b3b3bb16a25265.svg",
     "static/media/location.svg": "/resume-template/static/media/location.16d448f5095df05c600c40fa37e4f847.svg",
     "static/media/delete.svg": "/resume-template/static/media/delete.7bb463f7e69af9f46aab468515c1cba1.svg",
+    "static/media/download.svg": "/resume-template/static/media/download.32f7b7ac8d2eb6d33f6507df72e8b210.svg",
     "static/media/checkmark.svg": "/resume-template/static/media/checkmark.2f4b8fdae8d0f856637f73e76118ded2.svg",
     "main.c2e131f9.css.map": "/resume-template/static/css/main.c2e131f9.css.map",
-    "main.ad104345.js.map": "/resume-template/static/js/main.ad104345.js.map"
+    "main.7d4fa27c.js.map": "/resume-template/static/js/main.7d4fa27c.js.map"
   },
   "entrypoints": [
     "static/css/main.c2e131f9.css",
-    "static/js/main.ad104345.js"
+    "static/js/main.7d4fa27c.js"
   ]
 }
