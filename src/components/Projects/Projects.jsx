@@ -63,7 +63,7 @@ export const Projects = ({ userData, setUserData, change, readyToSave }) => {
         <ProjectsList>
           {userData.projects.map((item) => {
             return (
-              <ProjectItem key={item.id}>
+              <ProjectItem $readyToSave={readyToSave} key={item.id}>
                 <ProjectLink
                   $color={userData.options.aColor}
                   target="_blank"
@@ -79,8 +79,14 @@ export const Projects = ({ userData, setUserData, change, readyToSave }) => {
                 >
                   Link
                 </ProjectLink>
-                {window.innerWidth < 1260 ? <br /> : <>{" - "}</>}
-                <ProjectTechnologyText>{`[  ${item.technology}  ]`}</ProjectTechnologyText>
+                {window.innerWidth < 1260 && !readyToSave ? (
+                  <br />
+                ) : (
+                  <>{" - "}</>
+                )}
+                <ProjectTechnologyText
+                  $readyToSave={readyToSave}
+                >{`[  ${item.technology}  ]`}</ProjectTechnologyText>
                 <ProjectText>{item.info}</ProjectText>
               </ProjectItem>
             );

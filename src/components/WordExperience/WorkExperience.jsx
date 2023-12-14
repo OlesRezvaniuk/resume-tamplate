@@ -82,7 +82,11 @@ export const WorkExperience = ({
                   <WorkExperiencePosition>
                     {item.company}
                   </WorkExperiencePosition>
-                  {window.innerWidth < 1260 ? <br /> : <>{" | "}</>}
+                  {window.innerWidth < 1260 && !readyToSave ? (
+                    <br />
+                  ) : (
+                    <>{" | "}</>
+                  )}
                   <WorkExperiencePosition $color={userData.options.aColor}>
                     {item.position}
                   </WorkExperiencePosition>

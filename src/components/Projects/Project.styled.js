@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const ProjectsTitle = styled.h2`
   font-size: 22px;
@@ -41,7 +41,7 @@ export const ProjectText = styled.p`
 
 export const ProjectItem = styled.li`
   overflow: hidden;
-  height: 288px;
+  height: ${(props) => (props.$readyToSave ? "100px" : "288px")};
   &::marker {
     font-weight: 700;
   }
@@ -54,4 +54,17 @@ export const ProjectTechnologyText = styled.span`
   display: flex;
   margin-top: 6px;
   margin-bottom: 24px;
+
+  ${(props) =>
+    props.$readyToSave &&
+    css`
+      display: initial;
+      margin-top: initial;
+      margin-bottom: initial;
+    `}
+  @media screen and (min-width: 1260px) {
+    display: initial;
+    margin-top: initial;
+    margin-bottom: initial;
+  }
 `;
