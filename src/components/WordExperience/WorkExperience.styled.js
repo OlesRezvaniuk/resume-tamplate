@@ -50,16 +50,16 @@ export const WorkExperienceItem = styled.li`
 `;
 
 export const WorkExperienceItemResponsibilitieItem = styled.li`
-  height: 37px;
-  &::marker {
-    color: ${(props) => props.$color};
+  height: 20px;
+  @media screen and (max-width: 1199px) {
+    height: 37px;
   }
   ${(props) =>
     props.$readyToSave &&
     css`
       height: 20px;
     `}
-  @media screen and (min-width: 1260px) {
-    height: 20px;
+  &::marker {
+    color: ${(props) => props.$color};
   }
 `;
