@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const WorkExperienceContainer = styled.div`
   margin-bottom: 35px;
@@ -54,6 +54,11 @@ export const WorkExperienceItemResponsibilitieItem = styled.li`
   &::marker {
     color: ${(props) => props.$color};
   }
+  ${(props) =>
+    props.$readyToSave &&
+    css`
+      height: 20px;
+    `}
   @media screen and (min-width: 1260px) {
     height: 20px;
   }

@@ -54,7 +54,6 @@ export const ProjectTechnologyText = styled.span`
   display: flex;
   margin-top: 6px;
   margin-bottom: 24px;
-
   ${(props) =>
     props.$readyToSave &&
     css`
