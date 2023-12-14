@@ -14,7 +14,7 @@ import {
   ContactListItem,
 } from "./Contacts.styled";
 
-export const Contacts = ({ userData, setUserData, change }) => {
+export const Contacts = ({ userData, setUserData, change, readyToSave }) => {
   const [editData, setEditData] = useState(null);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export const Contacts = ({ userData, setUserData, change }) => {
           {Object.keys(userData.contacts).map((item) => {
             if (item === "tel" || item === "email") {
               return (
-                <ContactListItem key={`contacts-${item}`}>
+                <ContactListItem $ready={readyToSave} key={`contacts-${item}`}>
                   {userData.contacts[item] !== "" ? (
                     <ContactLink
                       href={
@@ -70,11 +70,14 @@ export const Contacts = ({ userData, setUserData, change }) => {
           <ContactsInputsList>
             {Object.keys(editData).map((item) => {
               return (
-                <ContactsInputsListItem key={`editContacts-${item}`}>
+                <ContactsInputsListItem
+                  $ready={readyToSave}
+                  key={`editContacts-${item}`}
+                >
                   <ContactInputType>
-                    {item === "city" && <LocationIcon />}
-                    {item === "tel" && <TelIcon />}
-                    {item === "email" && <EmailIcon />}
+                    {item === "city" && <LocationIcon $ready={readyToSave} />}
+                    {item === "tel" && <TelIcon $ready={readyToSave} />}
+                    {item === "email" && <EmailIcon $ready={readyToSave} />}
                   </ContactInputType>
                   <ContactsInput
                     type="text"

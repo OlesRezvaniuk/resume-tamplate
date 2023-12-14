@@ -7,10 +7,6 @@ import {
   AddProjectInputsListItem,
   AddProjectInput,
   AddProjectTextArea,
-  AddProjectButtonsBox,
-  CheckIcon,
-  CrossIcon,
-  AddProjectsConfirmButton,
 } from "./AddProject.styled";
 
 function maxLength(item) {

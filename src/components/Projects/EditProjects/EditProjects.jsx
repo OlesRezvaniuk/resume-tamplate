@@ -57,6 +57,7 @@ export const EditProjects = ({
             </EditProjectsInputsList>
             <EditProjectsTextInput
               value={editData[index].info}
+              placeholder="project info..."
               onChange={(e) => {
                 const updateData = [...editData];
                 updateData[index].info = e.target.value;

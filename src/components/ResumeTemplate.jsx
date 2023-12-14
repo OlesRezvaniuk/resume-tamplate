@@ -1,138 +1,30 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { singInGoogle } from "../redux/auth/authOperation";
-import { Specialty } from "./Specialty/Specialty";
-import { UseSelector } from "react-redux/es/hooks/useSelector";
 import { authSelector } from "../redux/auth/authSelector";
 import firebaseRequests from "../firebase/firebaseRuquests/firebaseRequests";
-import { Name } from "./Name/Name";
-import { Info } from "./Info/Info";
-import { Projects } from "./Projects/Projects";
-import { WorkExperience } from "./WordExperience/WorkExperience";
-import { Education } from "./Education/Education";
-import { Avatar } from "./Avatar/Avatar";
-import { Contacts } from "./Contacts/Contacts";
-import { Social } from "./Social/Social";
-import { TechSkills } from "./TechSkills/TechSkills";
-import { SoftSkills } from "./SoftSkills/SoftSkills";
-import { Languages } from "./Languages/Languages";
 import { Main } from "./Main/Main";
 import { Aside } from "./Aside/Aside";
-import { nanoid } from "@reduxjs/toolkit";
-import { ResumeTemplateContainer } from "./ResumeTemplate.styled";
+import {
+  ResumeTemplateContainer,
+  ContentContainer,
+  ScaleSizeText,
+} from "./ResumeTemplate.styled";
+import { data } from "./data/data";
+import { Controls } from "./Controls/Controls";
 
 function ResumeTemplate() {
   const { auth } = useSelector(authSelector);
-  const [change, setChange] = useState(true);
+  const [change, setChange] = useState(false);
   const [restoreData, setRestoreData] = useState(null);
-  const [mobile, setMobile] = useState(false);
-  const [userData, setUserData] = useState({
-    specialty: "you'r specialty",
-    name: "you'r name",
-    info: "Describe your work experience and your preferences...",
-    projects: [
-      {
-        gitLink: "https://github.com/",
-        lifeLink: "https://olesrezvaniuk.github.io/resume-template/",
-        id: nanoid(),
-        name: "Project #1",
-        technology: "project technology",
-        info: "Describe this project in more detail",
-      },
-      {
-        gitLink: "https://github.com/",
-        lifeLink: "https://olesrezvaniuk.github.io/resume-template/",
-        id: nanoid(),
-        name: "Project #2",
-        technology: "project technology",
-        info: "Describe this project in more detail",
-      },
-      {
-        gitLink: "https://github.com/",
-        lifeLink: "https://olesrezvaniuk.github.io/resume-template/",
-        id: nanoid(),
-        name: "Project #3",
-        technology: "project technology",
-        info: "Describe this project in more detail",
-      },
-      {
-        gitLink: "https://github.com/",
-        lifeLink: "https://olesrezvaniuk.github.io/resume-template/",
-        id: nanoid(),
-        name: "Project #4",
-        technology: "project technology",
-        info: "Describe this project in more detail",
-      },
-    ],
-    workExperience: [
-      {
-        startYear: "0000",
-        endYear: "0000",
-        company: "Company #1",
-        position: "Position #1",
-        responsibilities: [{ id: nanoid(), value: "responsibilities #1" }],
-        id: nanoid(),
-      },
-      {
-        startYear: "0000",
-        endYear: "0000",
-        company: "Company #2",
-        position: "Position #2",
-        responsibilities: [{ id: nanoid(), value: "responsibilities #2" }],
-        id: nanoid(),
-      },
-    ],
-    education: [
-      {
-        startYear: "0000",
-        endYear: "0000",
-        name: "Institution #1",
-        position: "Position #1",
-        id: nanoid(),
-      },
-      {
-        startYear: "0000",
-        endYear: "0000",
-        name: "Institution #2",
-        position: "Position #2",
-        id: nanoid(),
-      },
-    ],
-    contacts: {
-      tel: "+000000000000",
-      email: "yourEmail@gmail.com",
-      city: "yourCity",
-    },
-    social: {
-      facebook: "facebookLink",
-      telegram: "telegramLink",
-      gitHub: "githubLink",
-      LinkedIn: "LinkedinLink",
-    },
-    techSkills: [
-      { id: nanoid(), value: "tech skill #1" },
-      { id: nanoid(), value: "tech skill #2" },
-      { id: nanoid(), value: "tech skill #3" },
-      { id: nanoid(), value: "tech skill #4" },
-      { id: nanoid(), value: "tech skill #5" },
-      { id: nanoid(), value: "tech skill #6" },
-    ],
-    softSkills: [
-      { id: nanoid(), value: "soft skill #1" },
-      { id: nanoid(), value: "soft skill #2" },
-      { id: nanoid(), value: "soft skill #3" },
-      { id: nanoid(), value: "soft skill #4" },
-      { id: nanoid(), value: "soft skill #5" },
-      { id: nanoid(), value: "soft skill #6" },
-    ],
-    languages: [
-      { id: nanoid(), value: "Language #1", level: "level?" },
-      { id: nanoid(), value: "Language #2", level: "level?" },
-      { id: nanoid(), value: "Language #3", level: "level?" },
-      { id: nanoid(), value: "Language #4", level: "level?" },
-    ],
-    avatar: null,
-  });
+  const [readyToSave, setReadyToSave] = useState(false);
+  const [userData, setUserData] = useState(data);
+  const [bgColor, setBgColor] = useState("");
+  const [fColor, setFColor] = useState("");
+  const [controlsPosition, setControlsPosition] = useState("auto");
+  const [scale, setScale] = useState(1);
+  const [sizeVisible, setSizeVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -147,81 +39,84 @@ function ResumeTemplate() {
     }
   }, [!change]);
 
+  async function isLoading() {
+    setLoading(true);
+    await firebaseRequests.getUserData({
+      userId: auth.uid,
+      setUserData,
+      userData,
+    });
+    setLoading(false);
+  }
+
   useEffect(() => {
-    auth &&
-      firebaseRequests.getUserData({
-        userId: auth.uid,
-        setUserData,
-        userData,
-      });
+    if (auth) {
+      isLoading();
+    }
     auth && setChange(false);
+    !auth && setUserData(data);
+    !auth && setChange(false);
   }, [auth]);
 
   function sendChanges() {
     firebaseRequests.postUserData({ userId: auth.uid, userData });
   }
 
+  function determinePosition() {
+    const element = document.getElementById("mainContainer");
+    const computedStyle = window.getComputedStyle(element);
+    const marginRight = computedStyle.getPropertyValue("margin-right");
+    setControlsPosition(marginRight);
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      determinePosition();
+    });
+    controlsPosition === "auto" && determinePosition();
+  }, [window.innerWidth, controlsPosition]);
+
   return (
-    <ResumeTemplateContainer>
-      <div>
-        <button
-          style={{ marginRight: 50, background: "grey", color: "white" }}
-          onClick={() => {
-            setMobile(!mobile);
-          }}
-        >
-          {!mobile ? "MOBILE" : "PC"}
-        </button>
-        <button
-          onClick={() => {
-            window.print();
-          }}
-        >
-          PRINT
-        </button>
-        <button
-          onClick={() => {
-            firebaseRequests.getUserData({ userId: auth.uid, setUserData });
-          }}
-        >
-          getData
-        </button>
-        <button onClick={handleSingInGoogle}>Auth</button>
-        <button
-          style={{ background: !change ? "#fff" : "green" }}
-          onClick={() => {
-            if (auth) {
-              setChange(!change);
-              change && sendChanges();
-            }
-          }}
-        >
-          {!change ? "change data" : "confirm"}
-        </button>
-        {change && (
-          <button
-            onClick={() => {
-              setUserData(restoreData);
-            }}
-          >
-            restoreData
-          </button>
-        )}
-      </div>
-      <div
-        style={{
-          display: !mobile && "flex",
-          justifyContent: "center",
-        }}
+    <ResumeTemplateContainer id="mainContainer" $ready={readyToSave}>
+      <Controls
+        userData={userData}
+        setUserData={setUserData}
+        controlsPosition={controlsPosition}
+        change={change}
+        setChange={setChange}
+        readyToSave={readyToSave}
+        setReadyToSave={setReadyToSave}
+        restoreData={restoreData}
+        scale={scale}
+        setScale={setScale}
+        setSizeVisible={setSizeVisible}
+      />
+      {sizeVisible && <ScaleSizeText>{scale * 100}%</ScaleSizeText>}
+      <ContentContainer
+        $auth={auth}
+        $loading={loading}
+        $ready={readyToSave}
+        id="savePDFdoc"
       >
-        <Aside userData={userData} change={change} setUserData={setUserData} />
+        <Aside
+          userData={userData}
+          change={change}
+          setUserData={setUserData}
+          bgColor={bgColor}
+          setBgColor={setBgColor}
+          fColor={fColor}
+          setFColor={setFColor}
+          readyToSave={readyToSave}
+        />
         <Main
           userData={userData}
           change={change}
           setUserData={setUserData}
           setChange={setChange}
+          bgColor={bgColor}
+          readyToSave={readyToSave}
         />
-      </div>
+      </ContentContainer>
     </ResumeTemplateContainer>
   );
 }

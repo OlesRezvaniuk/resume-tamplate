@@ -1,7 +1,7 @@
 import { InfoContainer, InfoEditInput, InfoText } from "./Info.styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const Info = ({ userData, change, setUserData }) => {
+export const Info = ({ userData, change, setUserData, readyToSave }) => {
   return (
     <InfoContainer>
       {change ? (
@@ -12,7 +12,7 @@ export const Info = ({ userData, change, setUserData }) => {
           }}
         ></InfoEditInput>
       ) : (
-        <InfoText>{userData.info}</InfoText>
+        <InfoText $ready={readyToSave}>{userData.info}</InfoText>
       )}
     </InfoContainer>
   );

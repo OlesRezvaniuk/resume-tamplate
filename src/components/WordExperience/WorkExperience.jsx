@@ -10,11 +10,19 @@ import {
   WorkExperienceList,
   WorkExperienceButtonsBox,
   WorkExperienceAddButton,
+  WorkExperienceItem,
+  WorkExperienceItemResponsibilitieItem,
 } from "./WorkExperience.styled";
 import { AddWorkExperience } from "./AddWorkExperience/AddWorkExperience";
 import { EditWorkExperience } from "./EditWorkExperience/EditWorkExperience";
 
-export const WorkExperience = ({ userData, setUserData, change }) => {
+export const WorkExperience = ({
+  userData,
+  setUserData,
+  change,
+  bgColor,
+  readyToSave,
+}) => {
   const [templateData, setTemplateData] = useState({
     state: false,
     data: {
@@ -51,7 +59,7 @@ export const WorkExperience = ({ userData, setUserData, change }) => {
   return (
     <WorkExperienceContainer>
       <WorkExperienceTitle>Work Experince</WorkExperienceTitle>
-      {editWorkExperience && (
+      {change && (
         <EditWorkExperience
           userData={userData}
           setUserData={setUserData}
@@ -64,17 +72,27 @@ export const WorkExperience = ({ userData, setUserData, change }) => {
         <WorkExperienceList>
           {userData.workExperience.map((item) => {
             return (
-              <li key={item.id}>
-                <div style={{ marginBottom: 4 }}>
+              <WorkExperienceItem key={item.id}>
+                <div
+                  style={{
+                    height: window.innerWidth < 1260 ? "auto" : 20,
+                    marginBottom: 3,
+                  }}
+                >
                   <WorkExperiencePosition>
                     {item.company}
                   </WorkExperiencePosition>
-                  {" | "}
-                  <WorkExperiencePosition $variant="true">
+                  {window.innerWidth < 1260 ? <br /> : <>{" | "}</>}
+                  <WorkExperiencePosition $color={userData.options.aColor}>
                     {item.position}
                   </WorkExperiencePosition>
                 </div>
-                <div style={{ marginBottom: 4 }}>
+                <div
+                  style={{
+                    height: window.innerWidth < 1260 ? "auto" : 20,
+                    marginBottom: 3,
+                  }}
+                >
                   <WorkExperienceYear>{item.startYear}</WorkExperienceYear>
                   <WorkExperienceYear>
                     {" - "}
@@ -85,41 +103,19 @@ export const WorkExperience = ({ userData, setUserData, change }) => {
                   <WorkExperienceREsponsibilitiesList>
                     {item.responsibilities.map((item) => {
                       return (
-                        <li key={item.id}>
+                        <WorkExperienceItemResponsibilitieItem
+                          $color={userData.options.aColor}
+                          key={item.id}
+                        >
                           <WorkExperienceResponsibilitiesText>
                             {item.value}
                           </WorkExperienceResponsibilitiesText>
-                        </li>
+                        </WorkExperienceItemResponsibilitieItem>
                       );
                     })}
                   </WorkExperienceREsponsibilitiesList>
                 )}
-                {change && (
-                  <div>
-                    <button
-                      onClick={() => {
-                        setEditWorkExperience(item);
-                      }}
-                    >
-                      edit
-                    </button>
-                    <button
-                      onClick={() => {
-                        const updateData = userData.workExperience.filter(
-                          (obj) => obj.id !== item.id
-                        );
-
-                        setUserData({
-                          ...userData,
-                          workExperience: updateData,
-                        });
-                      }}
-                    >
-                      delete
-                    </button>
-                  </div>
-                )}
-              </li>
+              </WorkExperienceItem>
             );
           })}
         </WorkExperienceList>

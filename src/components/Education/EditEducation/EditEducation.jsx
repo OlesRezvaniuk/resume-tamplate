@@ -3,6 +3,8 @@ import {
   EditEducationInputItem,
   DeleteButton,
   DeleteIcon,
+  EditEducationList,
+  EditEducationInput,
 } from "./EditEducation.styled";
 
 export const EditEducation = ({
@@ -14,12 +16,19 @@ export const EditEducation = ({
   return (
     <>
       {editData && editData.length > 0 && (
-        <ul style={{ listStyle: "none" }}>
+        <ul
+          style={{
+            listStyle: "none",
+            display: "flex",
+            flexDirection: "column",
+            gap: 4,
+          }}
+        >
           {editData.map((item) => {
             const index = editData.findIndex((i) => i.id === item.id);
             return (
               <EditEducationItem key={item.id}>
-                <ul style={{ display: "flex", listStyle: "none" }}>
+                <EditEducationList>
                   {Object.keys(editData[0]).map((key) => {
                     if (key !== "id") {
                       return (
@@ -27,7 +36,7 @@ export const EditEducation = ({
                           $text={key}
                           key={`${editData[index].id}-${key}`}
                         >
-                          <input
+                          <EditEducationInput
                             type="text"
                             name={`editEducation-${item.id}-${key}`}
                             placeholder={key}
@@ -35,14 +44,18 @@ export const EditEducation = ({
                             onChange={(e) => {
                               const updateData = [...editData];
                               updateData[index][key] = e.target.value;
-                              setEditData(updateData);
+
+                              setUserData({
+                                ...userData,
+                                education: updateData,
+                              });
                             }}
                           />
                         </EditEducationInputItem>
                       );
                     }
                   })}
-                </ul>
+                </EditEducationList>
                 <DeleteButton
                   onClick={() => {
                     const updateData = editData.filter(

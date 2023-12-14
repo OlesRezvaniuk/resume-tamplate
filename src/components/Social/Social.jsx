@@ -13,7 +13,7 @@ import {
   SocialLinksList,
 } from "./Social.styled";
 
-export const Social = ({ userData, setUserData, change }) => {
+export const Social = ({ userData, setUserData, change, readyToSave }) => {
   const [editData, setEditData] = useState(null);
 
   useEffect(() => {
@@ -30,7 +30,10 @@ export const Social = ({ userData, setUserData, change }) => {
         <SocialInputsList>
           {Object.keys(editData).map((item) => {
             return (
-              <SocialInputsListItem key={`editSocialData-${item}`}>
+              <SocialInputsListItem
+                $ready={readyToSave}
+                key={`editSocialData-${item}`}
+              >
                 <SocialInputItemName>
                   {item === "facebook" && (
                     <FacebookIcon $editIcon="true" title="" />
@@ -67,7 +70,12 @@ export const Social = ({ userData, setUserData, change }) => {
               return (
                 <SocialLinkItem key={`socialLink-${item}`}>
                   <a
-                    style={{ display: "flex", width: "100%", height: "100%" }}
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      height: "100%",
+                      fill: userData.options.fColor,
+                    }}
                     target="_blank"
                     href={
                       item === "telegram"
@@ -75,10 +83,30 @@ export const Social = ({ userData, setUserData, change }) => {
                         : `https://${userData.social[item]}`
                     }
                   >
-                    {item === "facebook" && <FacebookIcon title="" />}
-                    {item === "LinkedIn" && <LinkedinIcon title="" />}
-                    {item === "gitHub" && <GithubIcon title="" />}
-                    {item === "telegram" && <TelegramIcon title="" />}
+                    {item === "facebook" && (
+                      <FacebookIcon
+                        title=""
+                        style={{ fill: userData.options.fColor }}
+                      />
+                    )}
+                    {item === "LinkedIn" && (
+                      <LinkedinIcon
+                        title=""
+                        style={{ fill: userData.options.fColor }}
+                      />
+                    )}
+                    {item === "gitHub" && (
+                      <GithubIcon
+                        title=""
+                        style={{ fill: userData.options.fColor }}
+                      />
+                    )}
+                    {item === "telegram" && (
+                      <TelegramIcon
+                        title=""
+                        style={{ fill: userData.options.fColor }}
+                      />
+                    )}
                   </a>
                 </SocialLinkItem>
               );

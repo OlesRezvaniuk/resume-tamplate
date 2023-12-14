@@ -3,11 +3,19 @@ import firebase from "../../firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useSelector, useDispatch } from "react-redux";
 import { authSelector } from "../../redux/auth/authSelector";
-import { AvatarContainer, AvatarPlugBox, AvatarImg } from "./Avatar.styled";
+import { AvatarContainer, AvatarImg } from "./Avatar.styled";
 import { getAvatar } from "../../redux/auth/authOperation";
+import { UserPlugIcon } from "./Avatar.styled";
 
-export const Avatar = ({ userData, setUserData, change }) => {
+export const Avatar = ({
+  userData,
+  setUserData,
+  change,
+  readyToSave,
+}) => {
   const [avatarFile, setAvatarFile] = useState(null);
+  const [avatarPath, setAvatarPath] = useState(null);
+  const [imgAvatar, setImgAvatar] = useState(null);
   const { auth } = useSelector(authSelector);
   const { avatar } = useSelector(authSelector);
   const dispatch = useDispatch();
@@ -26,16 +34,31 @@ export const Avatar = ({ userData, setUserData, change }) => {
     }
   }
 
-  useEffect(() => {
-    avatarFile && uploadAvatar();
-  }, [avatarFile]);
+  async function blob() {
+    setImgAvatar(userData.avatar);
+    const imageUrl = userData.avatar;
+    const response = await fetch(imageUrl);
+    const blob = await response.blob();
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = () => {
+      const base64data = reader.result;
+      setImgAvatar(base64data);
+    };
+  }
 
   useEffect(() => {
-    dispatch(getAvatar({ file: userData.avatar }));
+    blob();
   }, [userData.avatar]);
 
+  useEffect(() => {
+    avatarFile && uploadAvatar();
+    avatarPath && dispatch(getAvatar({ file: avatarPath }));
+  }, [avatarFile, avatarPath]);
+
   return (
-    <AvatarContainer $bgImage={avatar}>
+    <AvatarContainer  $ready={readyToSave}>
+      {userData.avatar ? <AvatarImg src={imgAvatar} /> : <UserPlugIcon />}
       {change && (
         <input
           style={{
@@ -50,6 +73,8 @@ export const Avatar = ({ userData, setUserData, change }) => {
           type="file"
           onChange={(e) => {
             setAvatarFile(e.target.files[0]);
+            const imageUrl = URL.createObjectURL(e.target.files[0]);
+            setAvatarPath(imageUrl);
           }}
         />
       )}

@@ -28,3 +28,7 @@ code {
   outline: none;
   color: #425168;
 }
+
+#root {
+  position: relative;
+}

@@ -1,49 +1,7 @@
 import styled from "styled-components";
 import { ReactComponent as DeleteIconPrimal } from "./icon/delete.svg";
-import { ReactComponent as CrossIconPrimal } from "./icon/cross.svg";
-import { ReactComponent as CheckmarkIconPrimal } from "./icon/checkmark.svg";
-
-export const CheckmarkIcon = styled(CheckmarkIconPrimal)`
-  height: 16px;
-  fill: inherit;
-  pointer-events: none;
-  margin-bottom: 1px;
-`;
-export const CrossIcon = styled(CrossIconPrimal)`
-  height: 14px;
-  fill: inherit;
-  pointer-events: none;
-  margin-bottom: 1px;
-`;
-
-export const LanguagesAddButtonBox = styled.div`
-  background: #425168;
-  border-radius: 3px;
-  height: 100%;
-  align-items: center;
-  display: flex;
-`;
-
-export const LanguagesAddButtonVariant = styled.button`
-  background: none;
-  background: #425168;
-  height: 100%;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  transition: 250ms;
-  fill: #fff;
-  &:hover,
-  &:focus {
-    background: #fff;
-    fill: #425168;
-    box-shadow: 0px 0px 1px #425168;
-  }
-`;
 
 export const LanguagesContainer = styled.div`
-  padding: 0px 30px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -61,19 +19,21 @@ export const LanguagesAddButton = styled.button`
   margin-left: auto;
   width: 20px;
   height: 20px;
-  background: #425168;
+  background: ${(props) => props.$bgColor};
   color: #fff;
   transition: 250ms;
   cursor: pointer;
   margin-top: 8px;
   position: absolute;
   bottom: -30px;
-  right: 30px;
+  right: 0;
+  border-radius: 2px;
+  outline: 1px solid lightgrey;
   &:hover,
   &:focus {
     background: #fff;
-    color: #425168;
-    outline: 1px solid #425168;
+    color: ${(props) => props.$bgColor};
+    outline: 1px solid lightgrey;
   }
   height: 26px;
   width: 26px;
@@ -85,6 +45,7 @@ export const LanguagesAddButton = styled.button`
 `;
 
 export const LanguagesSkillsListItem = styled.li`
+  position: relative;
   padding: 0px 0px 0px 10px;
   display: flex;
   justify-content: space-between;
@@ -95,7 +56,6 @@ export const LanguagesSkillsListItem = styled.li`
   &:hover,
   &:focus {
     box-shadow: 0px 0px 0px 1px grey;
-    background: #fff;
   }
 `;
 
@@ -107,25 +67,29 @@ export const DeleteIcon = styled(DeleteIconPrimal)`
 `;
 
 export const LanguageItemEditButton = styled.button`
-  width: 20px;
+  width: 21px;
   fill: #fff;
-  background: #425168;
+  background: ${(props) => props.$bgColor};
+  border-left: 1px solid lightgrey;
   height: 20px;
   justify-content: center;
   display: flex;
   align-items: center;
   cursor: pointer;
   transition: 250ms;
+  outline: 1px solid lightgrey;
   &:hover,
   &:focus {
-    fill: #425168;
+    * {
+      fill: ${(props) => props.$bgColor};
+    }
     background: #fff;
-    outline: 1px solid #425168;
+    outline: 1px solid ${(props) => props.$bgColor};
   }
   height: 26px;
   width: 26px;
   @media screen and (min-width: 1260px) {
-    width: 20px;
+    width: 21px;
     height: 20px;
   }
 `;
@@ -142,32 +106,22 @@ export const LanguagesEditInput = styled.input`
   cursor: pointer;
   width: 100%;
   transition: 250ms;
-  &:hover,
-  &:focus {
-    background: #fff;
-  }
-`;
-export const LanguagesAddInput = styled.input`
-  background: none;
-  cursor: pointer;
-  width: 133.25px;
-  transition: 250ms;
-  &:hover,
-  &:focus {
-    background: #fff;
-  }
+  // &:hover,
+  // &:focus {
+  //   background: #fff;
+  // }
 `;
 
 export const LanguagesEditLevelList = styled.ul`
   list-style: none;
   position: absolute;
-  height: 60px;
+  height: 68px;
   overflow: overlay;
-  right: 64px;
-  background: #425168;
+  right: 0px;
+  background: #fff;
   scroll-behavior: smooth;
   z-index: 1;
-  width: 132.2px;
+  width: 160px;
   box-shadow: 0px 0px 0px 1px lightgrey;
   &:hover,
   &:focus {
@@ -180,61 +134,46 @@ export const LanguagesEditLevelItemButton = styled.button`
   color: #fff;
   font-weight: 700;
   cursor: pointer;
-
   text-align: start;
   transition: 250ms;
   &:hover,
   &:focus {
-    background: #fff;
-    color: #425168;
+    color: ${(props) => props.$bgColor};
   }
 `;
 
 export const LanguagesEditSetLevelButton = styled.button`
   width: 180px;
   width: -webkit-fill-available;
-  border: 1px solid #425168;
+  outline: 1px solid lightgrey;
+  margin-right: 3px;
   transition: 250ms;
   cursor: pointer;
   color: #fff;
-  background: #425168;
+  background: none;
   &:hover,
   &:focus {
-    background: none;
-    color: #425168;
+    background: #fff;
+    color: ${(props) => props.$color};
+    outline: 1px solid grey;
   }
 `;
 
-export const LanguagesAddBox = styled.div`
-  margin-top: 3px;
-  position: relative;
-  padding: 0px 0px 0px 10px;
+export const LanguageItem = styled.li`
+  &::marker {
+    color: ${(props) => props.$markerColor};
+  }
+`;
+
+export const LanguageLevelListItem = styled.li`
   display: flex;
-  justify-content: space-between;
-  box-shadow: 0px 0px 0px 1px lightgrey;
-  border-radius: 2px;
+  padding: 0px 6px;
   transition: 250ms;
-  height: 19px;
   cursor: pointer;
-  transition: 250ms;
-  &:hover,
-  &:focus {
-    box-shadow: 0px 0px 0px 1px grey;
-    background: #fff;
-  }
-`;
-
-export const LanguagesAddSetLevelButton = styled.button`
-  background: lightgrey;
-  width: 100%;
-  cursor: pointer;
-  background: #425168;
   color: #fff;
-  transition: 250ms;
+  background: ${(props) => props.$bgColor};
   &:hover,
   &:focus {
     background: #fff;
-    color: #425168;
-    border: 1px solid #425168;
   }
 `;

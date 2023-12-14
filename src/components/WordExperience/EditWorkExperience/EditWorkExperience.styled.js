@@ -20,29 +20,39 @@ export const DeleteButton = styled.button`
   transition: 250ms;
   cursor: pointer;
   position: absolute;
-  width: 24px;
-  height: 24px;
+  height: 30px;
+  width: 30px;
   border-radius: 2px;
-  top: 0;
-  right: -30px;
+  top: -5px;
+  right: -36px;
   &:hover,
   &:focus {
     fill: #425168;
     outline: 1px solid #425168;
+  }
+  @media screen and (min-width: 1260px) {
+    width: 24px;
+    height: 24px;
+    top: 6px;
+    right: -30px;
   }
 `;
 
 export const EditWorkExperienceList = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
   list-style: none;
+  width: calc(100% - 30px);
+  @media screen and (min-width: 1260px) {
+    width: initial;
+  }
 `;
 
 export const EditWorkExperienceItem = styled.li`
-  padding: 10px 3px 3px 3px;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
+  // padding: 10px 3px 3px 3px;
+  min-height: 56px;
+  border-bottom: 1px solid lightgrey;
   position: relative;
 `;
 
@@ -52,17 +62,27 @@ export const EditWorkExperienceInputBox = styled.ul`
     justify-content: space-between;
     list-style: none;
     margin-bottom: 6px;
+    flex-direction: column;
+    @media screen and (min-width: 1260px) {
+      flex-direction: row;
+    }
 }`;
 
 export const EditWorkExperienceInput = styled.input`
-  outline: 1px solid #425168a8;
+  border-bottom: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
   border-radius: 2px;
   cursor: pointer;
   box-shadow: 0px 0px 0px #425168;
   transition: 250ms;
   padding: 1px;
   padding-left: 4px;
+  width: 100%;
+  height: 26px;
   width: ${(props) => props.$tp && "100%"};
+  @media screen and (min-width: 1260px) {
+    height: 20px;
+  }
 `;
 
 export const EditWorkExperienceInputsItem = styled.li`
@@ -70,7 +90,8 @@ export const EditWorkExperienceInputsItem = styled.li`
   position: relative;
   opacity: 0.8;
   transition: 250ms;
-
+  height: 26px;
+  margin-bottom: 4px;
   &::before {
     content: ${(props) => props.$text && `"${props.$text}"`};
     position: absolute;
@@ -82,11 +103,16 @@ export const EditWorkExperienceInputsItem = styled.li`
   &:focus {
     opacity: 1;
   }
+  @media screen and (min-width: 1260px) {
+    margin-bottom: initial;
+    height: 20px;
+  }
 `;
 
 export const AddResponsibilities = styled.button`
-  width: 17px;
-  height: 17px;
+  margin-top: 3px;
+  width: 24px;
+  height: 24px;
   background: #fff;
   outline: 1px solid lightgrey;
   color: #fff;
@@ -102,17 +128,22 @@ export const AddResponsibilities = styled.button`
     background: #425168;
     outline: 1px solid #425168;
   }
+  @media screen and (min-width: 1260px) {
+    width: 17px;
+    height: 17px;
+  }
 `;
 
 export const DeleteResponsibilities = styled.button`
-  position: absolute;
-  right: 0;
-  top: 0;
+  // position: absolute;
+  // right: 0;
+  // top: 0;
+  margin-left: 3px;
   height: 100%;
-  width: 17px;
+  width: 26px;
   border-radius: 2px;
   background: #fff;
-  outline: 1px solid #425168a8;
+  outline: 1px solid lightgrey;
   cursor: pointer;
   transition: 250ms;
   color: lightgrey;
@@ -123,19 +154,25 @@ export const DeleteResponsibilities = styled.button`
     outline: 1px solid #425168;
     fill: #fff;
   }
+  @media screen and (min-width: 1260px) {
+    width: 17px;
+  }
 `;
 
 export const ResponsibilitiesList = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: 4px;
+  gap: 3px;
+  // margin-bottom: 4px;
 `;
 
 export const ResponsibilitiesItem = styled.li`
   position: relative;
   display: flex;
-  height: 17px;
+  height: 26px;
+  @media screen and (min-width: 1260px) {
+    height: 20px;
+  }
 `;
 
 export const ResponsibilitiesBox = styled.div`

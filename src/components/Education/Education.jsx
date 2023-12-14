@@ -4,7 +4,14 @@ import { AddEducation } from "./AddEducation/AddEducation";
 import { EditEducation } from "./EditEducation/EditEducation";
 import { EducationTitle, EducationList } from "./Education.styled";
 
-export const Education = ({ userData, setUserData, change }) => {
+export const Education = ({
+  userData,
+  setUserData,
+  change,
+  bgColor,
+  readyToSave,
+  EducationItemName,
+}) => {
   const [editData, setEditData] = useState(null);
 
   useEffect(() => {
@@ -16,7 +23,12 @@ export const Education = ({ userData, setUserData, change }) => {
   }, [change, userData.education]);
 
   return (
-    <div style={{ position: "relative" }}>
+    <div
+      style={{
+        position: "relative",
+        width: window.innerWidth < 1260 ? "280px" : "auto",
+      }}
+    >
       <EducationTitle>Education</EducationTitle>
       {change && (
         <>
@@ -41,7 +53,7 @@ export const Education = ({ userData, setUserData, change }) => {
           {userData.education.map((item) => {
             return (
               <li key={item.id}>
-                <h3 style={{ color: "#2e9aff" }}>{item.name}</h3>
+                <h3 style={{ color: userData.options.aColor }}>{item.name}</h3>
                 <span>
                   {item.startYear}
                   {" - "}

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { ReactComponent as DeleteIconPrimal } from "./icon/delete.svg";
 import { ReactComponent as CrossIconPrimal } from "./icon/cross.svg";
 import { ReactComponent as CheckmarkIconPrimal } from "./icon/checkmark.svg";
@@ -7,19 +7,21 @@ export const SoftSkillsAddButton = styled.button`
   margin-left: auto;
   width: 20px;
   height: 20px;
-  background: #425168;
+  background: ${(props) => props.$bgColor};
+  outline: 1px solid lightgrey;
   color: #fff;
   transition: 250ms;
   cursor: pointer;
   margin-top: 8px;
   position: absolute;
   bottom: -30px;
-  right: 30px;
+  right: 0;
+  border-radius: 2px;
   &:hover,
   &:focus {
     background: #fff;
-    color: #425168;
-    outline: 1px solid #425168;
+    color: ${(props) => props.$bgColor};
+    outline: 1px solid ${(props) => props.$bgColor};
   }
   height: 26px;
   width: 26px;
@@ -39,7 +41,6 @@ export const SoftSkillsTitle = styled.h2`
 `;
 
 export const SoftSkillsContainer = styled.div`
-  padding: 0px 30px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -91,6 +92,11 @@ export const SoftSkillsListItem = styled.li`
     box-shadow: 0px 0px 0px 1px grey;
   }
   height: 26px;
+  ${(props) =>
+    props.$ready &&
+    css`
+      height: 20px;
+    `}
   @media screen and (min-width: 1260px) {
     height: 20px;
   }
@@ -103,9 +109,10 @@ export const SoftSkillsInput = styled.input`
 `;
 
 export const SoftSkillsItemEditButton = styled.button`
-  width: 20px;
+  width: 21px;
   fill: #fff;
-  background: #425168;
+  background: ${(props) => props.$bgColor};
+  border-left: 1px solid lightgrey;
   height: 20px;
   justify-content: center;
   display: flex;
@@ -114,14 +121,22 @@ export const SoftSkillsItemEditButton = styled.button`
   transition: 250ms;
   &:hover,
   &:focus {
-    fill: #425168;
+    * {
+      fill: ${(props) => props.$bgColor};
+    }
     background: #fff;
-    outline: 1px solid #425168;
+    border-left: 1px solid lightgrey;
   }
   height: 26px;
   width: 26px;
+  ${(props) =>
+    props.$ready &&
+    css`
+      width: 21px;
+      height: 20px;
+    `}
   @media screen and (min-width: 1260px) {
-    width: 20px;
+    width: 21px;
     height: 20px;
   }
 `;
@@ -176,4 +191,11 @@ export const SoftSkillsAddInput = styled.input`
   background: none;
   cursor: pointer;
   width: 100%;
+`;
+
+export const SoftSkillsItem = styled.li`
+  height: 20px;
+  &::marker {
+    color: ${(props) => props.$markerColor};
+  }
 `;

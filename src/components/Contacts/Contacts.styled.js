@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { ReactComponent as TelIconPrimal } from "./icon/mobile2.svg";
 import { ReactComponent as EmailIconPrimal } from "./icon/envelop.svg";
 import { ReactComponent as LocationIconPrimal } from "./icon/location.svg";
@@ -7,34 +7,50 @@ export const TelIcon = styled(TelIconPrimal)`
   width: 18px;
   height: 18px;
   fill: inherit;
-  @media screen and (max-width: 1259px) {
-    width: 22px;
-    height: 22px;
+  ${(props) =>
+    props.$ready &&
+    css`
+      width: 18px;
+      height: 18px;
+    `}
+  @media screen and (min-width: 1260px) {
+    width: 18px;
+    height: 18px;
   }
 `;
 export const EmailIcon = styled(EmailIconPrimal)`
   width: 18px;
   height: 18px;
   fill: inherit;
-  @media screen and (max-width: 1259px) {
-    width: 22px;
-    height: 22px;
+  ${(props) =>
+    props.$ready &&
+    css`
+      width: 18px;
+      height: 18px;
+    `}
+  @media screen and (min-width: 1260px) {
+    width: 18px;
+    height: 18px;
   }
 `;
 
 export const LocationIcon = styled(LocationIconPrimal)`
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   fill: inherit;
-  @media screen and (max-width: 1259px) {
-    width: 22px;
-    height: 22px;
+  ${(props) =>
+    props.$ready &&
+    css`
+      width: 18px;
+      height: 18px;
+    `}
+  @media screen and (min-width: 1260px) {
+    width: 18px;
+    height: 18px;
   }
 `;
 
-export const ContactsContainer = styled.div`
-  padding: 0px 30px;
-`;
+export const ContactsContainer = styled.div``;
 
 export const ContactTitle = styled.h2`
   margin-bottom: 8px;
@@ -72,6 +88,11 @@ export const ContactsInputsListItem = styled.li`
     fill: #425168;
   }
   height: 26px;
+  ${(props) =>
+    props.$ready &&
+    css`
+      height: 20px;
+    `}
   @media screen and (min-width: 1260px) {
     height: 20px;
   }
@@ -106,6 +127,11 @@ export const ContactLink = styled.a`
 
 export const ContactListItem = styled.li`
   height: 26px;
+  ${(props) =>
+    props.$ready &&
+    css`
+      height: 20px;
+    `}
   @media screen and (min-width: 1260px) {
     height: 20px;
   }

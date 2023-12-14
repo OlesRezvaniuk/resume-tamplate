@@ -1,8 +1,28 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const SpecialtyContainer = styled.div`
+  display: flex;
+  align-items: end;
   margin-bottom: 20px;
-  height: 18px;
+  height: 20px;
+  position: absolute;
+  top: 55px;
+  width: inherit;
+  padding: 0px 15px;
+  left: 0;
+  ${(props) =>
+    props.$ready &&
+    css`
+      position: static;
+      top: auto;
+    `}
+  @media screen and (min-width: 1260px) {
+    padding: initial;
+    width: auto;
+    position: static;
+    top: auto;
+    left: auto;
+  }
 `;
 
 export const SpecialtyTitle = styled.h2`
@@ -15,19 +35,23 @@ export const SpecialtyTitle = styled.h2`
 `;
 
 export const SpecialtyEditInput = styled.input`
-  width: 300px;
   height: 100%;
+  width: 100%;
   font-size: 100%;
   padding: 0px 0px 0px 10px;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0px 0px 0px 1px lightgrey;
-  border-radius: 2px;
+  // box-shadow: 0px 0px 0px 1px lightgrey;
+  // border-radius: 2px;
   transition: 250ms;
   cursor: pointer;
   font-size: 14px;
+  border-bottom: 1px solid lightgrey;
   &:hover,
   &:focus {
-    box-shadow: 0px 0px 0px 1px #425168;
+    border-bottom: 1px solid grey;
   }
+  // @media screen and (min-width: 1260px) {
+  //   width: 300px;
+  // }
 `;

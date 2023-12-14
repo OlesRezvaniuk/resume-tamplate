@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import { nanoid } from "nanoid";
 import {
   ProjectsTitle,
-  ProjectsText,
+  // ProjectsText,
   ProjectLink,
   ProjectText,
   ProjectsList,
   ProjectItem,
+  ProjectTechnologyText,
 } from "./Project.styled";
 import { EditProjects } from "./EditProjects/EditProjects";
 import { AddProject } from "./AddProject/AddProject";
 
-export const Projects = ({ userData, setUserData, change }) => {
+export const Projects = ({ userData, setUserData, change, readyToSave }) => {
   const [templateData, setTemplateData] = useState({
     state: false,
     data: {
@@ -22,7 +22,6 @@ export const Projects = ({ userData, setUserData, change }) => {
       info: "",
     },
   });
-  const [editProject, setEditProject] = useState(null);
   const [editData, setEditData] = useState(null);
 
   useEffect(() => {
@@ -64,21 +63,24 @@ export const Projects = ({ userData, setUserData, change }) => {
         <ProjectsList>
           {userData.projects.map((item) => {
             return (
-              <ProjectItem
-                key={item.id}
-                style={{
-                  height: 100,
-                }}
-              >
-                <ProjectLink target="_blank" href={item.gitLink}>
+              <ProjectItem key={item.id}>
+                <ProjectLink
+                  $color={userData.options.aColor}
+                  target="_blank"
+                  href={item.gitLink}
+                >
                   {item.name}
                 </ProjectLink>
                 {" - "}
-                <ProjectLink target="_blank" href={item.lifeLink}>
+                <ProjectLink
+                  $color={userData.options.aColor}
+                  target="_blank"
+                  href={item.lifeLink}
+                >
                   Link
                 </ProjectLink>
-                {" - "}
-                {`[  ${item.technology}  ]`}
+                {window.innerWidth < 1260 ? <br /> : <>{" - "}</>}
+                <ProjectTechnologyText>{`[  ${item.technology}  ]`}</ProjectTechnologyText>
                 <ProjectText>{item.info}</ProjectText>
               </ProjectItem>
             );

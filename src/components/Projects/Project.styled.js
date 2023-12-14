@@ -17,6 +17,7 @@ export const ProjectLink = styled.a`
   font-weight: 700;
   font-size: 15px;
   line-height: 24px;
+  color: ${(props) => props.$color};
 `;
 
 export const ProjectsList = styled.ol`
@@ -29,16 +30,28 @@ export const ProjectsList = styled.ol`
 
 export const ProjectText = styled.p`
   width: 100%;
-  height: 72px;
+  min-height: 120px;
   font-size: 15px;
   font-weight: 400;
   line-height: 24px;
+  @media screen and (min-width: 1260px) {
+    min-height: 72px;
+  }
 `;
 
 export const ProjectItem = styled.li`
   overflow: hidden;
-  height: 100px;
+  height: 288px;
   &::marker {
     font-weight: 700;
   }
+  @media screen and (min-width: 1260px) {
+    height: 100px;
+  }
+`;
+
+export const ProjectTechnologyText = styled.span`
+  display: flex;
+  margin-top: 6px;
+  margin-bottom: 24px;
 `;

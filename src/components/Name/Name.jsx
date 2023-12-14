@@ -1,10 +1,11 @@
 import { NameBox, NameTitle, NameEditInput } from "./Name.styled";
 
-export const Name = ({ userData, change, setUserData }) => {
+export const Name = ({ userData, change, setUserData, readyToSave }) => {
   return (
-    <NameBox>
+    <NameBox $ready={readyToSave}>
       {change ? (
         <NameEditInput
+          $ready={readyToSave}
           type="text"
           value={userData.name}
           onChange={(e) => {
@@ -12,7 +13,7 @@ export const Name = ({ userData, change, setUserData }) => {
           }}
         />
       ) : (
-        <NameTitle>
+        <NameTitle $ready={readyToSave}>
           {userData.name === "" ? "User name" : userData.name}
         </NameTitle>
       )}

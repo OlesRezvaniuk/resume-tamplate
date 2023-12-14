@@ -12,13 +12,8 @@ import {
   LanguagesEditLevelList,
   LanguagesEditLevelItemButton,
   LanguagesEditSetLevelButton,
-  LanguagesAddBox,
-  CheckmarkIcon,
-  CrossIcon,
-  LanguagesAddButtonBox,
-  LanguagesAddButtonVariant,
-  LanguagesAddInput,
-  LanguagesAddSetLevelButton,
+  LanguageItem,
+  LanguageLevelListItem,
 } from "./Languages.styled";
 
 const languagesLevel = [
@@ -31,7 +26,7 @@ const languagesLevel = [
   "Proficiency",
 ];
 
-export const Languages = ({ userData, setUserData, change }) => {
+export const Languages = ({ userData, setUserData, change, readyToSave }) => {
   const [templateData, setTemplateData] = useState({
     state: false,
     value: "",
@@ -39,7 +34,6 @@ export const Languages = ({ userData, setUserData, change }) => {
     setLevel: false,
   });
   const [editData, setEditData] = useState(null);
-  const [modalSetLevel, setModalSetLevel] = useState(false);
 
   useEffect(() => {
     if (change) {
@@ -77,11 +71,15 @@ export const Languages = ({ userData, setUserData, change }) => {
         >
           {userData.languages.map((item) => {
             return (
-              <li style={{ pointerEvents: "none" }} key={item.id}>
+              <LanguageItem
+                $markerColor={userData.options.aColor}
+                style={{ pointerEvents: "none" }}
+                key={item.id}
+              >
                 <span>{item.value}</span>
                 {item.level !== "" && " - "}
                 <span>{item.level}</span>
-              </li>
+              </LanguageItem>
             );
           })}
         </ul>
@@ -108,6 +106,7 @@ export const Languages = ({ userData, setUserData, change }) => {
                     }}
                   />
                   <LanguagesEditSetLevelButton
+                    $color={userData.options.bgColor}
                     onClick={() => {
                       const some = editData.some(
                         (i) => i.setLevel !== item.setLevel
@@ -127,11 +126,12 @@ export const Languages = ({ userData, setUserData, change }) => {
                     <LanguagesEditLevelList>
                       {languagesLevel.map((item) => {
                         return (
-                          <li
+                          <LanguageLevelListItem
+                            $bgColor={userData.options.bgColor}
                             key={`editLanguagesLevel-${item}`}
-                            style={{ display: "flex" }}
                           >
                             <LanguagesEditLevelItemButton
+                              $bgColor={userData.options.bgColor}
                               onClick={async () => {
                                 updateData[index].level = item;
                                 updateData[index].setLevel = false;
@@ -140,12 +140,13 @@ export const Languages = ({ userData, setUserData, change }) => {
                             >
                               {item}
                             </LanguagesEditLevelItemButton>
-                          </li>
+                          </LanguageLevelListItem>
                         );
                       })}
                     </LanguagesEditLevelList>
                   )}
                   <LanguageItemEditButton
+                    $bgColor={userData.options.bgColor}
                     onClick={() => {
                       const updateData = userData.languages.filter(
                         (i) => i.id !== item.id
@@ -163,91 +164,19 @@ export const Languages = ({ userData, setUserData, change }) => {
       )}
       {change && (
         <LanguagesAddButton
+          $bgColor={userData.options.bgColor}
           onClick={() => {
-            setTemplateData({ ...templateData, state: true });
+            setUserData({
+              ...userData,
+              languages: [
+                ...userData.languages,
+                { id: nanoid(), value: "", setLevel: false, level: "" },
+              ],
+            });
           }}
         >
           +
         </LanguagesAddButton>
-      )}
-      {templateData.state && (
-        <LanguagesAddBox>
-          <LanguagesAddInput
-            type="text"
-            name="addLanguagesInput"
-            value={templateData.value}
-            onChange={(e) => {
-              setTemplateData({ ...templateData, value: e.target.value });
-            }}
-          />
-          <LanguagesAddSetLevelButton
-            onClick={() => {
-              setTemplateData({ ...templateData, setLevel: true });
-            }}
-          >
-            {templateData.level}
-          </LanguagesAddSetLevelButton>
-
-          {templateData.setLevel && (
-            <ul>
-              {languagesLevel.map((item) => {
-                console.log(item);
-                return (
-                  <li
-                    onClick={() => {
-                      setTemplateData({
-                        ...templateData,
-                        level: item,
-                        setLevel: false,
-                      });
-                    }}
-                    key={`languagesList-${item}`}
-                  >
-                    <span>{item}</span>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-          <LanguagesAddButtonBox>
-            <LanguagesAddButtonVariant
-              onClick={() => {
-                setUserData({
-                  ...userData,
-                  languages: [
-                    ...userData.languages,
-                    {
-                      id: nanoid(),
-                      value: templateData.value,
-                      level: templateData.level,
-                      setLevel: false,
-                    },
-                  ],
-                });
-                setTemplateData({
-                  state: false,
-                  value: "",
-                  level: "",
-                  setLevel: false,
-                });
-              }}
-            >
-              <CheckmarkIcon />
-            </LanguagesAddButtonVariant>
-            <LanguagesAddButtonVariant
-              onClick={() => {
-                setTemplateData({
-                  state: false,
-                  value: "",
-                  level: "",
-                  setLevel: false,
-                });
-              }}
-            >
-              <CrossIcon />
-            </LanguagesAddButtonVariant>
-          </LanguagesAddButtonBox>
-        </LanguagesAddBox>
       )}
     </LanguagesContainer>
   );

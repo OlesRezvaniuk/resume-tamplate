@@ -16,9 +16,10 @@ import {
   PencilIcon,
   DeleteIcon,
   TechSkillsInput,
+  TechSkillsItem,
 } from "./TechSkills.styled";
 
-export const TechSkills = ({ userData, setUserData, change }) => {
+export const TechSkills = ({ userData, setUserData, change, readyToSave }) => {
   const [templateData, setTemplateData] = useState({ state: false, value: "" });
   const [editData, setEditData] = useState(userData.techSkills);
 
@@ -52,6 +53,7 @@ export const TechSkills = ({ userData, setUserData, change }) => {
                 />
 
                 <TechSkillsItemEditButton
+                  $fill={userData.options.bgColor}
                   onClick={() => {
                     const updateData = userData.techSkills.filter(
                       (i) => i.id !== item.id
@@ -59,7 +61,7 @@ export const TechSkills = ({ userData, setUserData, change }) => {
                     setUserData({ ...userData, techSkills: updateData });
                   }}
                 >
-                  <DeleteIcon title="" />
+                  <DeleteIcon $fill={userData.options.bgColor} title="" />
                 </TechSkillsItemEditButton>
               </TechSkillsListItem>
             );
@@ -71,9 +73,12 @@ export const TechSkills = ({ userData, setUserData, change }) => {
             <TechSkillsList>
               {userData.techSkills.map((item) => {
                 return (
-                  <li style={{ height: "19.5px" }} key={item.id}>
+                  <TechSkillsItem
+                    $markerColor={userData.options.aColor}
+                    key={item.id}
+                  >
                     <span style={{ pointerEvents: "none" }}>{item.value}</span>
-                  </li>
+                  </TechSkillsItem>
                 );
               })}
             </TechSkillsList>
@@ -96,6 +101,8 @@ export const TechSkills = ({ userData, setUserData, change }) => {
 
       {change && (
         <TechSkillsAddButton
+          $bgColor={userData.options.bgColor}
+          $ready={readyToSave}
           onClick={async () => {
             setUserData({
               ...userData,

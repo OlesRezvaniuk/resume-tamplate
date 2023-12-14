@@ -26,6 +26,17 @@ export const singInGoogle = createAsyncThunk(
   }
 );
 
+export const logOutGoogle = createAsyncThunk(
+  "auth/logout",
+  (_, rejectWithValue) => {
+    try {
+      return null;
+    } catch (error) {
+      console.log(error, rejectWithValue);
+    }
+  }
+);
+
 export const getAvatar = createAsyncThunk(
   "auth/avatar",
   ({ file }, rejectWithValue) => {

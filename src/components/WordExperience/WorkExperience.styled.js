@@ -9,40 +9,52 @@ export const WorkExperienceTitle = styled.h2`
   font-size: 22px;
   font-style: normal;
   font-weight: 700;
-  line-height: normal;
   margin-bottom: 10px;
 `;
 
 export const WorkExperiencePosition = styled.span`
-  font-size: 16px;
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
-  color: ${(props) => (props.$variant ? "#2e9aff" : "inherit")};
+  font-size: 15px;
+  color: ${(props) => props.$color};
 `;
 
 export const WorkExperienceYear = styled.span`
   opacity: 0.7;
   font-weight: 400;
   font-size: 12px;
-  line-height: 15px;
 `;
 
 export const WorkExperienceResponsibilitiesText = styled.p`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 23px; /* 171.429% */
 `;
 
 export const WorkExperienceREsponsibilitiesList = styled.ul`
   list-style: disc;
   margin-left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 `;
 
 export const WorkExperienceList = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
+`;
+
+export const WorkExperienceItem = styled.li`
+  border-bottom: 1px solid transparent;
+`;
+
+export const WorkExperienceItemResponsibilitieItem = styled.li`
+  height: 37px;
+  &::marker {
+    color: ${(props) => props.$color};
+  }
+  @media screen and (min-width: 1260px) {
+    height: 20px;
+  }
 `;

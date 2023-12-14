@@ -1,16 +1,16 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { ReactComponent as CrossIconPrimal } from "./icon/cross.svg";
 import { ReactComponent as CheckmarkIconPrimal } from "./icon/checkmark.svg";
 import { ReactComponent as DeleteIconPrimal } from "./icon/delete.svg";
 import { ReactComponent as PencilIconPrimal } from "./icon/pencil.svg";
 
 export const TechSkillsContainer = styled.div`
-  padding: 0px 30px;
   display: flex;
   flex-direction: column;
   position: relative;
-  @media screen and (max-width: 1259px) {
-    margin-top: ${(props) => props.$edit && "30px"};
+  margin-top: ${(props) => props.$edit && "30px"};
+  @media screen and (min-width: 1260px) {
+    margin-top: 0;
   }
 `;
 
@@ -21,19 +21,22 @@ export const TechSkillsTitle = styled.h2`
 
 export const TechSkillsAddButton = styled.button`
   margin-left: auto;
-  background: #425168;
+  background: ${(props) => props.$bgColor};
+  outline: 1px solid lightgrey;
+  border-radius: 2px;
+
   color: #fff;
   transition: 250ms;
   cursor: pointer;
   position: absolute;
-  bottom: -30px;
-  right: 30px;
+  right: 0;
   &:hover,
   &:focus {
     background: #fff;
-    color: #425168;
-    outline: 1px solid #425168;
+    color: ${(props) => props.$bgColor};
+    outline: 1px solid ${(props) => props.$bgColor};
   }
+  bottom: -30px;
   height: 26px;
   width: 26px;
   @media screen and (min-width: 1260px) {
@@ -144,22 +147,24 @@ export const TechSkillsItemEditBox = styled.div`
 
 export const TechSkillsItemEditButton = styled.button`
   fill: #fff;
-  background: #425168;
+  background: ${(props) => props.$fill};
   justify-content: center;
   display: flex;
   align-items: center;
   cursor: pointer;
   transition: 250ms;
+  border-left: 1px solid lightgrey;
   &:hover,
   &:focus {
-    fill: #425168;
     background: #fff;
-    outline: 1px solid #425168;
+    * {
+      fill: ${(props) => props.$fill};
+    }
   }
   height: 26px;
   width: 26px;
   @media screen and (min-width: 1260px) {
-    width: 20px;
+    width: 21px;
     height: 20px;
   }
 `;
@@ -168,4 +173,11 @@ export const TechSkillsInput = styled.input`
   width: 100%;
   background: none;
   cursor: pointer;
+`;
+
+export const TechSkillsItem = styled.li`
+  height: 20px;
+  &::marker {
+    color: ${(props) => props.$markerColor};
+  }
 `;

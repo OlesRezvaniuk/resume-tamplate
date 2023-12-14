@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { singInGoogle, getAvatar } from "./authOperation";
+import { singInGoogle, getAvatar, logOutGoogle } from "./authOperation";
 
 const initialState = {
   auth: null,
@@ -11,6 +11,9 @@ export const authSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder.addCase(singInGoogle.fulfilled, (state, { payload }) => {
+      state.auth = payload;
+    });
+    builder.addCase(logOutGoogle.fulfilled, (state, { payload }) => {
       state.auth = payload;
     });
     builder.addCase(getAvatar.fulfilled, (state, { payload }) => {

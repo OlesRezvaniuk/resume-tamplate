@@ -3,9 +3,12 @@ import styled from "styled-components";
 export const AddWorkExperienceButtonsBox = styled.div`
   position: absolute;
   bottom: -30px;
-  right: 0;
   display: flex;
   gap: 6px;
+  right: 30px;
+  @media screen and (min-width: 1260px) {
+    right: 0;
+  }
 `;
 
 export const AddWorkExperienceAddButton = styled.button`

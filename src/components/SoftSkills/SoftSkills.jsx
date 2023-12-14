@@ -16,9 +16,10 @@ import {
   CrossIcon,
   SoftSkillsTitle,
   SoftSkillsAddInput,
+  SoftSkillsItem,
 } from "./SoftSkills.styled";
 
-export const SoftSkills = ({ userData, setUserData, change }) => {
+export const SoftSkills = ({ userData, setUserData, change, readyToSave }) => {
   const [templateData, setTemplateData] = useState({ state: false, value: "" });
   const [editData, setEditData] = useState(userData.softSkills);
 
@@ -36,7 +37,7 @@ export const SoftSkills = ({ userData, setUserData, change }) => {
           {editData.map((item) => {
             const index = editData.findIndex((i) => i.id === item.id);
             return (
-              <SoftSkillsListItem key={item.id}>
+              <SoftSkillsListItem $ready={readyToSave} key={item.id}>
                 <SoftSkillsInput
                   type="text"
                   name={item.id}
@@ -51,6 +52,8 @@ export const SoftSkills = ({ userData, setUserData, change }) => {
                   }}
                 />
                 <SoftSkillsItemEditButton
+                  $ready={readyToSave}
+                  $bgColor={userData.options.bgColor}
                   onClick={() => {
                     const updateData = userData.softSkills.filter(
                       (i) => i.id !== item.id
@@ -68,7 +71,10 @@ export const SoftSkills = ({ userData, setUserData, change }) => {
         <SoftSkillsList>
           {userData.softSkills.map((item) => {
             return (
-              <li key={item.id}>
+              <SoftSkillsItem
+                $markerColor={userData.options.aColor}
+                key={item.id}
+              >
                 <p style={{ pointerEvents: "none" }}>{item.value}</p>
                 {change && (
                   <SoftSkillsAddButtonBox>
@@ -95,7 +101,7 @@ export const SoftSkills = ({ userData, setUserData, change }) => {
                     </SoftSkillsAddButtonVariant>
                   </SoftSkillsAddButtonBox>
                 )}
-              </li>
+              </SoftSkillsItem>
             );
           })}
         </SoftSkillsList>
@@ -112,37 +118,12 @@ export const SoftSkills = ({ userData, setUserData, change }) => {
               setTemplateData({ ...templateData, value: e.target.value });
             }}
           />
-          {/* <SoftSkillsAddButtonBox>
-            <SoftSkillsAddButtonVariant
-              onClick={() => {
-                setUserData({
-                  ...userData,
-                  softSkills: [
-                    ...userData.softSkills,
-                    { id: nanoid(), value: templateData.value },
-                  ],
-                });
-                setTemplateData({ state: false, value: "" });
-              }}
-            >
-              <CheckmarkIcon title="" />
-            </SoftSkillsAddButtonVariant>
-            <SoftSkillsAddButtonVariant
-              onClick={() => {
-                setTemplateData({ state: false, value: "" });
-              }}
-            >
-              <CrossIcon title="" />
-            </SoftSkillsAddButtonVariant>
-          </SoftSkillsAddButtonBox> */}
         </SoftSkillAddInputBox>
       )}
       {change && !templateData.state && (
         <SoftSkillsAddButton
+          $bgColor={userData.options.bgColor}
           onClick={async () => {
-            // await setTemplateData({ ...templateData, state: true });
-            // const input = document.getElementById("techSkillsAddInput");
-            // input.focus();
             setUserData({
               ...userData,
               softSkills: [...userData.softSkills, { id: nanoid(), value: "" }],

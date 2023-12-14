@@ -11,7 +11,12 @@ export const EducationTitle = styled.h2`
 export const EducationList = styled.ul`
   list-style: none;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column;
   justify-content: start;
-  gap: 60px;
+  gap: 10px;
+  @media screen and (min-width: 1260px) {
+    display: flex;
+    gap: 60px;
+    flex-direction: row-reverse;
+  }
 `;
